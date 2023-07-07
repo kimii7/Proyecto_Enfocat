@@ -1,6 +1,7 @@
-from django.forms import ValidationError
 from rest_framework import serializers
+from rest_framework import status
 from django.contrib.auth import get_user_model, authenticate
+from .validations import CustomValidationError
 
 UserModel = get_user_model()
 
@@ -14,14 +15,15 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user_obj.save()
         return user_obj
 
-class UserLoginSerializer(serializers.ModelSerializer):
+class UserLoginSerializer(serializers.Serializer):
     email  = serializers.EmailField()
     password = serializers.CharField()
     ##
     def check_user(self, clean_data):
         user = authenticate(username = clean_data['email'], password = clean_data['password'])
         if not user:
-            raise ValidationError('No se encontro el usuario')
+            raise CustomValidationError("No se encontro el usuario o la contraseña no es correcta", 'error', status_code=status.HTTP_404_NOT_FOUND)
+        return user
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
