@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-fondo1 {
+    border-radius: 0% 100% 60% 40% / 70% 31% 69% 30%  ;
+  }
+
+
+.bg-fondo2{
+    border-radius: 30% 70% 13% 87% / 55% 34% 66% 45%  ;
+}
+
+.bg-fondo{
+    border-radius: 0px 0px 0px 150px;
+}
+
+.bg-fondo3{
+    border-radius: 0% 100% 6% 94% / 47% 95% 5% 53% ;
+}
