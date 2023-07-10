@@ -7,7 +7,8 @@ import tablet from '../assets/tablet.png'
 import '../index.css'
 import casa from '../assets/casa.jpg'
 import estadistica from '../assets/estadistica.jpg'
-
+import email3 from '../assets/email3.png'
+import telefono5 from '../assets/telefono5.png'
 const PaginaInicio = () => {
   return (
     <div className='bg-gradient-to-r from-cyan-200 to-pink-300'>
@@ -63,10 +64,24 @@ const PaginaInicio = () => {
           </div>
         </article>
       </div>
+      <footer className='bg-gray-800 mt-20'>
+        <div className='flex flex-row justify-around items-center h-20'>
+          <div className='text-white '> <img src={email3} alt="" className='w-[10vh]' /></div>
+          <div className='text-white '><img src={telefono5} alt="" className='w-[10vh]' /></div>
+          
+        </div>
+        <hr className='' />
+        <div className='flex flex-row justify-around items-center h-20'>
+          <div className='text-white '> <a href="#">Política de privacidad</a></div>
+          <div className='text-white '><a href="#">Términos y condiciones</a></div>
+          <div className='text-white '>© 2023 Mi Empresa. Todos los derechos reservados.</div>
+          
+        </div>
+      </footer>
 
     </div>
+  );
+};
+export default PaginaInicio;
 
-  )
-}
 
-export default PaginaInicio
