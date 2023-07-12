@@ -5,13 +5,12 @@ import mejora from '../assets/mejora.png'
 import tablet from '../assets/tablet.png'
 // import fondo from '../assets/fondo.png'
 import '../index.css'
-import casa from '../assets/casa.jpg'
-import estadistica from '../assets/estadistica.jpg'
-import email3 from '../assets/email3.png'
-import telefono5 from '../assets/telefono5.png'
+import casa from '../assets/casa.png'
+import estadistica from '../assets/estadistica.png'
+
 const PaginaInicio = () => {
   return (
-    <div className='bg-gradient-to-r from-cyan-200 to-pink-300'>
+    <div className='bg-gradient-to-r from-cyan-200 to-pink-300 '>
       <div className=' '>
         <MenuTailwind />
         <main className='grid md:grid-cols-2 mt-40 md:mt-20 '>
@@ -33,17 +32,17 @@ const PaginaInicio = () => {
           </div>
         </section>
         <section className='grid md:grid-cols-3 '>
-          <div className='bg-indigo-300 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-md'>
+          <div className='bg-indigo-900 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg '>
             <img src={casa} className='w-40 p-8' />
             <h4>Paso 1</h4>
             <p className='p-8'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium, incidunt?</p>
           </div>
-          <div className='bg-indigo-300 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-md'>
+          <div className='bg-indigo-900 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg'>
             <img src={estadistica} className='w-40 p-8' />
             <h4>Paso 2</h4>
             <p className='p-8'> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium, incidunt?</p>
           </div>
-          <div className='bg-indigo-300 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-md'>
+          <div className='bg-indigo-900 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg'>
             <img src={mejora} className='w-40 p-8' />
             <h4>Paso 3</h4>
             <p className='p-8'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium, incidunt?</p>
@@ -66,8 +65,8 @@ const PaginaInicio = () => {
       </div>
       <footer className='bg-gray-800 mt-20'>
         <div className='flex flex-row justify-around items-center h-20'>
-          <div className='text-white '> <img src={email3} alt="" className='w-[10vh]' /></div>
-          <div className='text-white '><img src={telefono5} alt="" className='w-[10vh]' /></div>
+          <div className='text-white '> </div>
+          <div className='text-white '></div>
           
         </div>
         <hr className='' />

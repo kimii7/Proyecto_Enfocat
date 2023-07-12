@@ -16,7 +16,7 @@ const ContactoInicio = () => {
             <input type="text" placeholder="Nombre" className='rounded-md p-3 my-4 ' />
             <input type="email" placeholder="Email" className='rounded-md p-3 my-4' />
             <textarea placeholder="Mensaje" className='h-40 resize-none rounded-md p-3 my-4' />
-            <button type="submit" className='md:w-40 bg-red-400 m-auto rounded-lg p-3 shadow-md'>Enviar</button>
+            <button type="submit" className='md:w-40 bg-red-400 m-auto rounded-lg p-3 shadow-md hover:bg-sky-400'>Enviar</button>
           </form>
         </div>
       

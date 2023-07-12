@@ -36,14 +36,14 @@ const MenuTailwind = () => {
           <div class={`hidden lg:flex lg:gap-x-12 ${abierto ? 'flex' : ''}`}>
             <Link to="/" class="text-sm font-semibold leading-6 text-gray-900">Home</Link>
             <Link to="/equipoinicio" class="text-sm font-semibold leading-6 text-gray-900">Equipo</Link>
-            <Link to="/contactoinicio" class="text-sm font-semibold leading-6 text-gray-900">Contacto</Link>
+            <Link to="/contacto/inicio" class="text-sm font-semibold leading-6 text-gray-900">Contacto</Link>
             
 
             
 
           </div>
           <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="/layout" href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></Link>
+            <Link to="/login" href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></Link>
           </div>
         </nav>
 
@@ -65,7 +65,7 @@ const MenuTailwind = () => {
             <div class="mt-6 flow-root">
               <div class="-my-6 divide-y divide-gray-500/10">
                 <div class="space-y-2 py-6">
-                  <Link to="/contactoinicio" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Conacto</Link>
+                  <Link to="/contacto/inicio" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Conacto</Link>
                   <Link to="/equipoinicio" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Equipo</Link>
                   <Link to="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</Link>
                   
