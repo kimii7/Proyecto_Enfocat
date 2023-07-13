@@ -4,4 +4,4 @@ from rest_framework import serializers
 class PlaceholderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Placeholder
-        fields = ['id', 'estado', 'hora', 'asignatura', 'profesor']
+        fields = ['usuario_id','fecha','contentos','desanimados','asignatura','profesor']
