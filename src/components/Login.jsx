@@ -1,16 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MenuTailwind from './MenuTailwind';
 import Fotter from './Fotter';
 
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
 
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = 'true';
+
+const client = axios.create({
+    baseURL: 'http://127.0.0.1:8000'
+});
 
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  
   const [termsAccepted, setTermsAccepted] = useState(false);
+
+  const [currentuser, setCurrentUser] = useState();
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    function Registrarse (e){
+        console.log(email)
+        e.preventDefault();
+        client.post(
+            '/api/register',
+            {       
+                email: email,
+                username: username,
+                password: password
+            }
+        ).then(function(res){
+            client.post(
+                '/api/login',
+                {
+                    email: email,
+                    password: password
+                }
+            
+            ).then(function(res){
+                setCurrentUser(true);
+            })
+        });
+    }
+
+    function logearse (e){
+        e.preventDefault();
+        console.log('logearse')
+        client.post(
+            '/api/login',
+            {
+                email: email,
+                password: password
+            }
+        ).then(function(res){
+            setCurrentUser(true);
+            console.log('funcionally logged')
+        });
+    }
+
+    function logout(e){
+        e.preventDefault();
+        client.post(
+            '/api/logout',
+            {whithCredentials: true}
+        ).then(function(res){
+            setCurrentUser(false);
+        })
+    }
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -56,7 +118,7 @@ const Login = () => {
         <form
           action=''
           className='bg-emerald-300 z-20 flex flex-col gap-6 md:w-1/2 landscape:md:w-1/2 landscape:m-auto m-auto rounded-md p-8 opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg shadow-lg'
-          onSubmit={handleSubmit}
+          onSubmit={logearse}
         >
           <h1>Sign up</h1>
           <input
@@ -64,14 +126,14 @@ const Login = () => {
             placeholder='Email'
             className='rounded-md p-3 my-4'
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type='password'
             placeholder='Introduce tu contraseña'
             className='rounded-md p-3 my-4'
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div>
             <input
