@@ -74,6 +74,21 @@ const Login = () => {
         })
     }
 
+    function micomentado(){
+      
+        useEffect(() => {
+        client.get('/api/user')
+            .then((res) => {
+                setCurrentUser(true);
+            })
+            .catch(function (error) {
+                setCurrentUser(false);
+            });
+    }, []);
+    }
+
+    
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -110,6 +125,17 @@ const Login = () => {
     console.log('Datos del formulario:', email, password);
   };
 
+
+  if(currentuser){
+    return (
+      <div>
+        <form onSubmit={e => micomentado}>
+          <button type='submit'>logout</button>
+        </form>
+        <h2>estas logeado</h2>
+      </div>
+    )
+  }
   return (
     <div className='bg-gradient-to-b from-orange-400 to-violet-400'>
       <MenuTailwind />
