@@ -20,7 +20,7 @@ class ShowAll(APIView):
     def get(self, request, user_id, format=None):
         estadoAsignatura = EstadoAsignatura.objects.filter(usuario_id=user_id)
         serializer = EstadoAsignaturaSerializer(estadoAsignatura, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class ShowToday(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -30,7 +30,7 @@ class ShowToday(APIView):
         hoy = hoy.strftime('%d/%m/%Y')
         estadoAsignatura = EstadoAsignatura.objects.filter(fecha__contains=hoy, usuario_id=user_id)
         serializer = EstadoAsignaturaSerializer(estadoAsignatura, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class ShowWeek(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -47,7 +47,7 @@ class ShowWeek(APIView):
 
         estadoAsignatura = EstadoAsignatura.objects.filter(Q(fecha__startswith=inicio_semana_str[:5]) | Q(fecha__endswith=fin_semana_str[3:]),usuario_id=user_id)
         serializer = EstadoAsignaturaSerializer(estadoAsignatura, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response( serializer.data, status=status.HTTP_200_OK)
 
 class ShowMonth(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -57,7 +57,7 @@ class ShowMonth(APIView):
         hoy = hoy.strftime('%m/%Y')
         estadoAsignatura = EstadoAsignatura.objects.filter(fecha__contains=hoy, usuario_id=user_id)
         serializer = EstadoAsignaturaSerializer(estadoAsignatura, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class UploadRecord(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -76,7 +76,7 @@ class getProfesores(APIView):
     def get(self, request, user_id, format=None):
         profesor = Profesor.objects.filter(usuario_id=user_id)
         serializer = ProfesorSerializer(profesor, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class getProfesorById(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -84,7 +84,7 @@ class getProfesorById(APIView):
     def get(self, request, prof_id, format=None):
         profesor = Profesor.objects.filter(id=prof_id)
         serializer = ProfesorSerializer(profesor, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class getAsignaturas(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -92,7 +92,7 @@ class getAsignaturas(APIView):
     def get(self, request, user_id, format=None):
         asignatura = Asignatura.objects.filter(usuario_id=user_id)
         serializer = AsignaturaSerializer(asignatura, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class getAsignaturaById(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -100,7 +100,7 @@ class getAsignaturaById(APIView):
     def get(self, request, asign_id, format=None):
         asignatura = Asignatura.objects.filter(id=asign_id)
         serializer = AsignaturaSerializer(asignatura, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class getHorario(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -108,4 +108,4 @@ class getHorario(APIView):
     def get(self, request, user_id, format=None):
         horario = Horario.objects.filter(usuario_id=user_id)
         serializer = HorarioSerializer(horario, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
