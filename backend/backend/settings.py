@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'user_api.apps.UserApiConfig',
+    'dataset_api.apps.DatasetApiConfig',
 ]
 
 MIDDLEWARE = [
