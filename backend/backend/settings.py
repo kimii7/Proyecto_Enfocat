@@ -34,6 +34,11 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+
 SESSION_COOKIE_SECURE = False
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
