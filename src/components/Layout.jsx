@@ -11,11 +11,11 @@ const Layout = () => {
     
 
 
-    if (localStorage.getItem('usuario') === null) {
-        var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host + '/';
-                window.location = baseUrl;
-      }else{
+    // if (localStorage.getItem('usuario') === null) {
+    //     var getUrl = window.location;
+    //             var baseUrl = getUrl.protocol + "//" + getUrl.host + '/';
+    //             window.location = baseUrl;
+    //   }else{
         return (
             <div className='flex'>
                 {sidebarVisible && <Navbar className="w-1/5" />}
@@ -27,7 +27,7 @@ const Layout = () => {
                 <button onClick={toggleSidebar} className=' fixed rounded-full bg-red-700 text-white bottom-4 right-4 text-2xl p-3'>aaaa</button>
             </div>
         )
-      }
+    //   }
     
 }
 

@@ -1,10 +1,5 @@
-import  { useState, useEffect } from "react";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-
+import React, { useEffect, useState } from "react";
+import { Doughnut } from "react-chartjs-2";
 import axios from "axios";
 
 const client = axios.create({
@@ -76,5 +71,5 @@ export default function GraficoDonutSemana() {
   };
 
   console.log(chartData)
-  return <Pie data={chartData} options={options} />;
+  return <Doughnut data={chartData} options={options} />;
 }

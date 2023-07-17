@@ -1,11 +1,16 @@
 import React from 'react'
 import Dropdown from './Dropdawn'
-import Grafico from './Graficolinea'
+import Grafico from './Graficolineames'
 
 import GraficoPastel from './Graficoastel'
 
 import GraficoBarras from './Graficobarras'
 import GraficoDonut from './Graficodonut'
+
+import GraficoDonutSemana from './Graficodonutsemana'
+import GraficoDonutHoy from './graficodonuthoy'
+import GraficoDonutMes from './Graficodonutmes'
+import GraficoLineasSemana from './Graficolineasemana'
 function Home() {
     return (
         <div className='bg-black'>
@@ -24,7 +29,7 @@ function Home() {
                 <div className=' bg-slate-100 p-8 rounded-md m-5 col-span-1 shadow-md w-100 h-96'>
 
 
-                <Grafico />
+                <GraficoLineasSemana />
                 </div>
                 <div className=' bg-indigo-100 p-8 rounded-md m-5 col-span-1 shadow-md w-100 h-96 flex justify-center'>
                     <Dropdown className="bg-slate-100 hover:bg-slate-50" />
@@ -32,24 +37,30 @@ function Home() {
                     <GraficoPastel />
                 </div>
             </div>
-            <div className='grid grid-cols-3'>
+            <div className='md:grid  md:grid-cols-4'>
                 <div className=' bg-indigo-100 p-8 rounded-md m-5 col-span-1 shadow-md'>
 
 
-                    <h1 className='text-indigo-900 text-2xl text-center'>Este mes</h1>
+                    <h1 className='text-indigo-900 text-2xl text-center'>Resumen</h1>
                     <GraficoDonut />
                 </div>
                 <div className=' bg-indigo-100 p-8 rounded-md m-5 col-span-1 shadow-md'>
 
 
-                    <h1 className='text-indigo-900 text-2xl text-center'>Ayer</h1>
-                    <GraficoDonut />
+                    <h1 className='text-indigo-900 text-2xl text-center'>Semanal</h1>
+                    <GraficoDonutSemana />
                 </div>
                 <div className=' bg-indigo-100 p-8 rounded-md m-5 col-span-1 shadow-md'>
 
 
                     <h1 className='text-indigo-900 text-2xl text-center'>Hoy</h1>
-                    <GraficoDonut />
+                    <GraficoDonutHoy />
+                </div>
+                <div className=' bg-indigo-100 p-8 rounded-md m-5 col-span-1 shadow-md'>
+
+
+                    <h1 className='text-indigo-900 text-2xl text-center'>Mes</h1>
+                    <GraficoDonutMes />
                 </div>
             </div>
 
