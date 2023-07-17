@@ -4,6 +4,12 @@ import Fotter from './Fotter'
 
 
 const ContactoInicio = () => {
+
+  if (localStorage.getItem('usuario') != null) {
+    var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
+            window.location = baseUrl;
+  }
   return (
     <div className='bg-gradient-to-r from-cyan-200 to-rose-300 min-h-screen'>
       <MenuTailwind />

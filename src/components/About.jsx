@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Calendar from './Calendario'
 function About() {
   return (
-    <div>Aboutjjjjjj</div>
+    <div>
+      <Calendar/>
+    </div>
   )
 }
 

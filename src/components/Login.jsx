@@ -11,83 +11,96 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = 'true';
 
 const client = axios.create({
-    baseURL: 'http://127.0.0.1:8000'
+  baseURL: 'http://127.0.0.1:8000'
 });
 
 
 const Login = () => {
-  
+
+  if (localStorage.getItem('usuario') != null) {
+    var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
+            window.location = baseUrl;
+  }
+
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   const [currentuser, setCurrentUser] = useState();
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
 
-    function Registrarse (e){
-        console.log(email)
-        e.preventDefault();
-        client.post(
-            '/api/register',
-            {       
-                email: email,
-                username: username,
-                password: password
-            }
-        ).then(function(res){
-            client.post(
-                '/api/login',
-                {
-                    email: email,
-                    password: password
-                }
-            
-            ).then(function(res){
-                setCurrentUser(true);
-            })
-        });
-    }
+  function Registrarse(e) {
+    console.log(email)
+    e.preventDefault();
+    client.post(
+      '/api/register',
+      {
+        email: email,
+        username: username,
+        password: password
+      }
+    ).then(function (res) {
+      client.post(
+        '/api/login',
+        {
+          email: email,
+          password: password
+        }
 
-    function logearse (e){
-        e.preventDefault();
-        console.log('logearse')
-        client.post(
-            '/api/login',
-            {
-                email: email,
-                password: password
-            }
-        ).then(function(res){
-            setCurrentUser(true);
-            console.log('funcionally logged')
-        });
-    }
+      ).then(function (res) {
+        setCurrentUser(true);
+      })
+    });
+  }
 
-    function logout(e){
-        e.preventDefault();
-        client.post(
-            '/api/logout',
-            {whithCredentials: true}
-        ).then(function(res){
-            setCurrentUser(false);
+  function logearse(e) {
+    e.preventDefault();
+    client.post(
+      '/api/login',
+      {
+        email: email,
+        password: password
+      }
+
+    ).then(function (res) {
+      localStorage.setItem('usuario', JSON.stringify(res.data));
+
+      // var usuario=localStorage.getItem('usuario');
+      // var objeto = JSON.parse(usuario.toString());
+      // console.log(objeto.user_id);
+      // window.location = "http://localhost:5174/layout";
+      var getUrl = window.location;
+      var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
+      window.location = baseUrl;
+    })
+  }
+
+  function logout(e) {
+    e.preventDefault();
+    client.post(
+      '/api/logout',
+      { whithCredentials: true }
+    ).then(function (res) {
+      setCurrentUser(false);
+    })
+  }
+
+  function micomentado() {
+
+    useEffect(() => {
+      client.get('/api/user')
+        .then((res) => {
+          setCurrentUser(true);
         })
-    }
-
-    function micomentado(){
-      
-        useEffect(() => {
-        client.get('/api/user')
-            .then((res) => {
-                setCurrentUser(true);
-            })
-            .catch(function (error) {
-                setCurrentUser(false);
-            });
+        .catch(function (error) {
+          setCurrentUser(false);
+        });
     }, []);
-    }
+  }
 
-    
+
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -126,7 +139,7 @@ const Login = () => {
   };
 
 
-  if(currentuser){
+  if (currentuser) {
     return (
       <div>
         <form onSubmit={e => micomentado}>

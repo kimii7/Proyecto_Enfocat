@@ -1,6 +1,17 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
+
+
+
+
+function logout() {
+
+  localStorage.removeItem("usuario");
+  var getUrl = window.location;
+  var baseUrl = getUrl.protocol + "//" + getUrl.host + '/';
+  window.location = baseUrl;
+}
 const Navbar = () => {
   return (
     <div>
@@ -15,19 +26,19 @@ const Navbar = () => {
           <nav>
             <ul className='flex flex-col gap-4'>
               <li className='flex items-center'> <Link className='text-white  flex items-center py-2 px-4 rounded-xl transition-all  hover:bg-indigo-900 gap-4' to='/layout'>Home</Link></li>
-              <li className='flex items-center'> <Link className='text-white  flex items-center py-2 px-4 rounded-xl transition-all  hover:bg-indigo-900 gap-4' to='/layout/about'>Informes</Link> </li>
+              <li className='flex items-center'> <Link className='text-white  flex items-center py-2 px-4 rounded-xl transition-all  hover:bg-indigo-900 gap-4' to='/layout/about'>Calendario</Link> </li>
               <li className='flex items-center'><Link className='text-white  flex items-center py-2 px-4 rounded-xl transition-all  hover:bg-indigo-900 gap-4' to='/layout/contact'>Resumen</Link> </li>
             </ul>
           </nav>
-          <div className='bg-indigo-700 p-4 rounded-xl shadow-md'>
-            <p className='text-white'>mis cosas</p>
-            <a className='text-white' href="#" >Contactanos</a>
+          <div className='bg-indigo-700 p-4 rounded-xl shadow-md flex justify-center w-40'>
+
+            <a className='text-white text-center cursor-pointer' onClick={logout} >Log out</a>
           </div>
-          
+
         </div>
 
       </div>
-      
+
     </div>
   )
 }

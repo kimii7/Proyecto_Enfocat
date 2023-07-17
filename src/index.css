@@ -31,3 +31,7 @@
 .bg-fondo6{
     border-radius: 69% 31% 56% 44% / 98% 67% 33% 2%   ;
 }
+
+.letra{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

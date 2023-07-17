@@ -4,7 +4,7 @@ import email from '../assets/email.png'
 const Fotter = () => {
   return (
     <div>
-      <footer className='bg-gray-800 mt-20'>
+      <footer className='bg-neutral-700 mt-20'>
         <div className='flex flex-row justify-around items-center h-20'>
           <div className='text-white '> <img src={phone} alt="" className='w-10'/>  </div>
           <div className='text-white '> <img src={email} alt="" className='w-10 text-white'/></div>
