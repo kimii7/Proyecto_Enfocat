@@ -31,19 +31,14 @@ class Horario(models.Model):
     hora = models.IntegerField()
 
 class EstadoAsignatura(models.Model):
-    hoy = datetime.today()
-    hoy = hoy.strftime('%d/%m/%Y')
-
-    hora = datetime.today()
-    hora = hora.strftime('%H')
-
+    hoy = datetime.now()
+    hoy = hoy + timedelta(hours=2)
     usuario = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
     contentos = models.IntegerField(default=0)
     desanimados = models.IntegerField(default=0)
-    fecha = models.CharField(max_length=60,default=hoy)
-    hora = models.IntegerField(default=hora)
+    fecha = models.DateTimeField(default=hoy)
     asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
     profesor = models.ForeignKey(Profesor, on_delete=models.CASCADE)
