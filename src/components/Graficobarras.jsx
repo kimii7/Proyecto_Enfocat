@@ -90,5 +90,5 @@ import {
     };
   
     console.log(chartData)
-    return <Bar data={chartData} options={options} />;
+    return   <Bar data={chartData} options={options} className="w-screen"/>;
   }

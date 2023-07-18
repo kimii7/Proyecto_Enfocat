@@ -6,9 +6,9 @@ const client = axios.create({
   baseURL: 'http://127.0.0.1:8000'
 });
 
-const fetchData = async (asignaturaId) => {
+const fetchData = async (asignatura_Id) => {
   try {
-    const response = await client.get(`/api/showMonthRecords/${asignaturaId}`);
+    const response = await client.get(`/api/showMonthRecords/${asignatura_Id}`);
     const data = response.data;
     console.log(data[0]['fecha']);
 

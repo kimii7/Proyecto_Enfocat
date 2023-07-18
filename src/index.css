@@ -35,3 +35,17 @@
 .letra{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+
+@media screen and (orientation: landscape) and (max-width: 767px) {
+    .landscape-styles {
+      /* Estilos específicos para el modo landscape en dispositivos móviles */
+      /* Por ejemplo, ajusta el ancho del div al 80% en dispositivos móviles en modo landscape */
+      width: 80%;
+    }
+  }
+  
+  
+
+
+  

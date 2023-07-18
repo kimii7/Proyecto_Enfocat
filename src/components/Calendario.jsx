@@ -1,55 +1,49 @@
-import React, { useState } from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import Modal from "react-modal";
+import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-const Calendar = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+const MyCalendar = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [notes, setNotes] = useState({});
-  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const events = [
-    { title: "Event 1", date: "2022-01-01" },
-    { title: "Event 2", date: "2022-01-05" },
-    { title: "Event 3", date: "2022-01-10" },
-  ];
+  useEffect(() => {
+    // Cargar notas desde el almacenamiento local al cargar la página
+    const storedNotes = localStorage.getItem("notes");
+    if (storedNotes) {
+      setNotes(JSON.parse(storedNotes));
+    }
+  }, []);
 
-  const handleDateClick = (arg) => {
-    setSelectedDate(arg.date);
-    setModalIsOpen(true);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
   };
 
   const handleNoteChange = (event) => {
     const { value } = event.target;
     setNotes((prevNotes) => ({
       ...prevNotes,
-      [selectedDate.toISOString()]: value,
+      [selectedDate.toISOString().split("T")[0]]: value,
     }));
   };
 
-  const handleModalClose = () => {
-    setModalIsOpen(false);
-  };
+  useEffect(() => {
+    // Guardar notas en el almacenamiento local cuando cambien
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   return (
     <div>
       <h1>My Calendar</h1>
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        events={events}
-        dateClick={handleDateClick}
-      />
-      <Modal isOpen={modalIsOpen} onRequestClose={handleModalClose}>
-        <h2>{selectedDate && selectedDate.toISOString().split("T")[0]}</h2>
+      <Calendar onChange={handleDateChange} value={selectedDate} />
+      <div>
+        <h2>{selectedDate.toISOString().split("T")[0]}</h2>
         <textarea
-          value={notes[selectedDate?.toISOString()] || ""}
+          value={notes[selectedDate?.toISOString().split("T")[0]] || ""}
           onChange={handleNoteChange}
         ></textarea>
-        <button onClick={handleModalClose}>Close</button>
-      </Modal>
+      </div>
     </div>
   );
 };
 
-export default Calendar;
+export default MyCalendar;
