@@ -53,11 +53,11 @@ const MyCalendar = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-stone-100">
       <Calendar
         onChange={handleDateChange}
         value={selectedDate}
-        className="mb-4 w-full border border-gray-300 rounded-md bg-sky-300 h-[50vh]"
+        className="mb-4 w-full border border-gray-300 rounded-md bg-indigo-100 h-[50vh] shadow-lg"
       />
       <div>
         <h2 className="text-lg font-bold mb-2">

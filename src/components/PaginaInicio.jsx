@@ -6,7 +6,7 @@ import tablet from '../assets/tablet.png'
 // import fondo from '../assets/fondo.png'
 import '../index.css'
 import house from '../assets/house.png'
-// import migrafico from '../assets/migrafico.png'
+import migrafico from '../assets/migrafico.png'
 
 import phone from '../assets/phone.png'
 import email from '../assets/email.png'
@@ -49,11 +49,11 @@ const PaginaInicio = () => {
             <h4>Paso 1</h4>
             <p className='p-8'>Familiarizate con la App y explora sus recursos</p>
           </div>
-          {/* <div className='bg-indigo-900 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg'>
+          <div className='bg-indigo-900 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg'>
             <img src={migrafico} className='w-40 p-8' />
             <h4>Paso 2</h4>
             <p className='p-8'> Analiza los datos, y saca tus propias conclusiones</p>
-          </div> */}
+          </div>
           <div className='bg-indigo-900 rounded-lg flex flex-col gap-4 m-5 items-center justify-center shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg'>
             <img src={happy} className='w-40 p-8' />
             <h4>Paso 3</h4>
