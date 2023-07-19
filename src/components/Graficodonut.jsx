@@ -1,29 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-// const url1 = 'http://localhost:8080/api/showAllRecords/1'  //el 1 es id
-// const url2 = 'http://localhost:8080/api/showTodayRecords/1'
-// const url3 = 'http://localhost:8080/api/showMonthRecords/1'
-// const url4 = 'http://localhost:8080/api/showWeekRecords/1'
+import axios from "axios";
 
+const client = axios.create({
+  baseURL: 'http://127.0.0.1:8000'
+});
 
-// fetch()
-//   .then(res => res.json())
-//   .then(data => console.log(data))
-//   .catch(err => console.log(err))
-const data = {
-  labels: ["Red", "Green", "Blue"],
-  datasets: [
-    {
-      data: [3, 4, 5],
-      backgroundColor: ["red", "green", "blue"],
-    },
-  ],
-};
+const fetchData = async () => {
+  try {
+    const response = await client.get('/api/showAllRecords/1');
+    const data = response.data;
+    console.log(data[0]['fecha']);
 
-const options = {
-  responsive: true,
+    const fechas = data.map((item) => item.fecha);
+    const contentos = data.map((item) => item.contentos);
+    const desanimados = data.map((item) => item.desanimados);
+
+    console.log(fechas);
+    console.log(contentos);
+    console.log(desanimados);
+
+    var totalContentos = 0;
+    var totalDesanimados = 0;
+
+    contentos.forEach(function(contento){
+      totalContentos += contento
+    })
+
+    desanimados.forEach(function(desanimado){
+      totalDesanimados += desanimado
+    })
+
+    
+
+    const grafico = {
+      labels: ["Contentos", "Desanimados"],
+      datasets: [
+        {
+          data: [totalContentos, totalDesanimados],
+          backgroundColor: ["green", "red"],
+        },
+      ],
+    };
+
+    return grafico;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 export default function GraficoDonut() {
-  return <Doughnut data={data} options={options} />;
+  const [chartData, setChartData] = useState(null);
+
+  useEffect(() => {
+    const fetchDataAndSetChartData = async () => {
+      const data = await fetchData();
+      setChartData(data);
+    };
+
+    fetchDataAndSetChartData();
+  }, []);
+
+  if (!chartData) {
+    return null;
+  }
+
+  const options = {
+    responsive: true,
+  };
+
+  console.log(chartData)
+  return <Doughnut data={chartData} options={options} />;
 }

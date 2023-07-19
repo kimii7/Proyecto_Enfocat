@@ -11,6 +11,8 @@ import house from '../assets/house.png'
 import phone from '../assets/phone.png'
 import email from '../assets/email.png'
 
+import Fotter from './Fotter'
+
 const PaginaInicio = () => {
 
   if (localStorage.getItem('usuario') != null) {
@@ -73,20 +75,7 @@ const PaginaInicio = () => {
           </div>
         </article>
       </div>
-      <footer className='bg-gray-800 mt-20'>
-        <div className='flex flex-row justify-around items-center h-20 mx-10'>
-          <div className='text-white '><img src={phone} alt="" className='w-10'/> </div>
-          <div className='text-white '><img src={email} alt="" className='w-10 text-white'/></div>
-          
-        </div>
-        <hr className='text-gray-700' />
-        <div className='flex flex-row justify-around items-center h-20 mx-10'>
-          <div className='text-white '> <a href="#">Política de privacidad</a></div>
-          <div className='text-white '><a href="#">Términos y condiciones</a></div>
-          <div className='text-white '>© 2023 Mi Empresa. Todos los derechos reservados.</div>
-          
-        </div>
-      </footer>
+      <Fotter/>
 
     </div>
   );

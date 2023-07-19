@@ -1,55 +1,61 @@
-import React, { useState } from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import Modal from "react-modal";
+import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-const Calendar = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [notes, setNotes] = useState({});
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+const MyCalendar = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [note, setNote] = useState("");
 
-  const events = [
-    { title: "Event 1", date: "2022-01-01" },
-    { title: "Event 2", date: "2022-01-05" },
-    { title: "Event 3", date: "2022-01-10" },
-  ];
+  useEffect(() => {
+    const storedNote = localStorage.getItem(getStorageKey());
+    if (storedNote) {
+      setNote(storedNote);
+    }
+  }, []);
 
-  const handleDateClick = (arg) => {
-    setSelectedDate(arg.date);
-    setModalIsOpen(true);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    const storedNote = localStorage.getItem(getStorageKey(date));
+    if (storedNote) {
+      setNote(storedNote);
+    } else {
+      setNote("");
+    }
   };
 
   const handleNoteChange = (event) => {
     const { value } = event.target;
-    setNotes((prevNotes) => ({
-      ...prevNotes,
-      [selectedDate.toISOString()]: value,
-    }));
+    setNote(value);
+    localStorage.setItem(getStorageKey(), value);
   };
 
-  const handleModalClose = () => {
-    setModalIsOpen(false);
+  const getStorageKey = (date) => {
+    const selected = date || selectedDate;
+    return `notes_${selected.toISOString().split("T")[0]}`;
   };
 
   return (
-    <div>
-      <h1>My Calendar</h1>
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        events={events}
-        dateClick={handleDateClick}
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-4">My Calendar</h1>
+      <Calendar
+        onChange={handleDateChange}
+        value={selectedDate}
+        className="mb-4"
       />
-      <Modal isOpen={modalIsOpen} onRequestClose={handleModalClose}>
-        <h2>{selectedDate && selectedDate.toISOString().split("T")[0]}</h2>
+      <div>
+        <h2 className="text-lg font-bold mb-2">
+          {selectedDate.toISOString().split("T")[0]}
+        </h2>
         <textarea
-          value={notes[selectedDate?.toISOString()] || ""}
+          value={note}
           onChange={handleNoteChange}
+          className="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:border-blue-500"
         ></textarea>
-        <button onClick={handleModalClose}>Close</button>
-      </Modal>
+      </div>
     </div>
   );
 };
 
-export default Calendar;
+export default MyCalendar;
+
+
