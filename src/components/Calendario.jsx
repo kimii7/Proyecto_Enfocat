@@ -4,42 +4,52 @@ import "react-calendar/dist/Calendar.css";
 
 const MyCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [notes, setNotes] = useState({});
+  const [note, setNote] = useState("");
 
   useEffect(() => {
-    // Cargar notas desde el almacenamiento local al cargar la página
-    const storedNotes = localStorage.getItem("notes");
-    if (storedNotes) {
-      setNotes(JSON.parse(storedNotes));
+    const storedNote = localStorage.getItem(getStorageKey());
+    if (storedNote) {
+      setNote(storedNote);
     }
   }, []);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    const storedNote = localStorage.getItem(getStorageKey(date));
+    if (storedNote) {
+      setNote(storedNote);
+    } else {
+      setNote("");
+    }
   };
 
   const handleNoteChange = (event) => {
     const { value } = event.target;
-    setNotes((prevNotes) => ({
-      ...prevNotes,
-      [selectedDate.toISOString().split("T")[0]]: value,
-    }));
+    setNote(value);
+    localStorage.setItem(getStorageKey(), value);
   };
 
-  useEffect(() => {
-    // Guardar notas en el almacenamiento local cuando cambien
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
+  const getStorageKey = (date) => {
+    const selected = date || selectedDate;
+    return `notes_${selected.toISOString().split("T")[0]}`;
+  };
 
   return (
-    <div>
-      <h1>My Calendar</h1>
-      <Calendar onChange={handleDateChange} value={selectedDate} />
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-4">My Calendar</h1>
+      <Calendar
+        onChange={handleDateChange}
+        value={selectedDate}
+        className="mb-4"
+      />
       <div>
-        <h2>{selectedDate.toISOString().split("T")[0]}</h2>
+        <h2 className="text-lg font-bold mb-2">
+          {selectedDate.toISOString().split("T")[0]}
+        </h2>
         <textarea
-          value={notes[selectedDate?.toISOString().split("T")[0]] || ""}
+          value={note}
           onChange={handleNoteChange}
+          className="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:border-blue-500"
         ></textarea>
       </div>
     </div>
@@ -47,3 +57,5 @@ const MyCalendar = () => {
 };
 
 export default MyCalendar;
+
+
