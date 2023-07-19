@@ -9,7 +9,9 @@ urlpatterns = [
     path('showWeekRecords/<int:user_id>', views.ShowWeek.as_view()),
     path('profesores/<int:user_id>', views.getProfesores.as_view()),
     path('profesor/<int:prof_id>', views.getProfesorById.as_view()),
+    path('post/profesor', views.UploadProfesor.as_view()),
     path('asignaturas/<int:user_id>', views.getAsignaturas.as_view()),
     path('asignatura/<int:asign_id>', views.getAsignaturaById.as_view()),
+    path('post/asignatura', views.UploadAsignatura.as_view()),
     path('horario/<int:user_id>', views.getHorario.as_view()),
 ]

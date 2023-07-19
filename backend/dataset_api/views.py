@@ -83,6 +83,17 @@ class getProfesores(APIView):
         serializer = ProfesorSerializer(profesor, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class UploadProfesor(APIView):
+    permission_classes = (permissions.AllowAny, )
+    authentication_classes = (SessionAuthentication, )
+    def post(self, request, format=None):
+        serializer = ProfesorSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            profesor = serializer.create(request.data)
+            if profesor:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
 class getProfesorById(APIView):
     permission_classes = (permissions.AllowAny, )
     authentication_classes = (SessionAuthentication, )
@@ -106,6 +117,17 @@ class getAsignaturaById(APIView):
         asignatura = Asignatura.objects.filter(id=asign_id)
         serializer = AsignaturaSerializer(asignatura, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class UploadAsignatura(APIView):
+    permission_classes = (permissions.AllowAny, )
+    authentication_classes = (SessionAuthentication, )
+    def post(self, request, format=None):
+        serializer = AsignaturaSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            asignatura = serializer.create(request.data)
+            if asignatura:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class getHorario(APIView):
     permission_classes = (permissions.AllowAny, )
