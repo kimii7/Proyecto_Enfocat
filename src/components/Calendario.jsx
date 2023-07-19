@@ -1,50 +1,67 @@
-import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import React, { useState, useEffect } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const MyCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [note, setNote] = useState("");
+  const [note, setNote] = useState('');
+  const [graphImage, setGraphImage] = useState(null);
 
   useEffect(() => {
-    const storedNote = localStorage.getItem(getStorageKey());
+    const storedNote = localStorage.getItem(getNoteStorageKey());
     if (storedNote) {
       setNote(storedNote);
     }
-  }, []);
+
+    const storedGraphImage = localStorage.getItem(getImageStorageKey());
+    if (storedGraphImage) {
+      setGraphImage(storedGraphImage);
+    }
+  }, [selectedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    const storedNote = localStorage.getItem(getStorageKey(date));
+    const storedNote = localStorage.getItem(getNoteStorageKey(date));
     if (storedNote) {
       setNote(storedNote);
     } else {
-      setNote("");
+      setNote('');
+    }
+
+    const storedGraphImage = localStorage.getItem(getImageStorageKey(date));
+    if (storedGraphImage) {
+      setGraphImage(storedGraphImage);
+    } else {
+      setGraphImage(null);
     }
   };
 
   const handleNoteChange = (event) => {
     const { value } = event.target;
     setNote(value);
-    localStorage.setItem(getStorageKey(), value);
+    localStorage.setItem(getNoteStorageKey(), value);
   };
 
-  const getStorageKey = (date) => {
+  const getImageStorageKey = (date) => {
     const selected = date || selectedDate;
-    return `notes_${selected.toISOString().split("T")[0]}`;
+    return `graphImage_${selected.toISOString().split('T')[0]}`;
+  };
+
+  const getNoteStorageKey = (date) => {
+    const selected = date || selectedDate;
+    return `notes_${selected.toISOString().split('T')[0]}`;
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">My Calendar</h1>
       <Calendar
         onChange={handleDateChange}
         value={selectedDate}
-        className="mb-4"
+        className="mb-4 w-full border border-gray-300 rounded-md bg-sky-300 h-[50vh]"
       />
       <div>
         <h2 className="text-lg font-bold mb-2">
-          {selectedDate.toISOString().split("T")[0]}
+          {selectedDate.toISOString().split('T')[0]}
         </h2>
         <textarea
           value={note}
@@ -52,10 +69,21 @@ const MyCalendar = () => {
           className="w-full rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:border-blue-500"
         ></textarea>
       </div>
+      <div className="mt-4" id="graphContainer">
+        <h2 className="text-lg font-bold mb-2">
+          {selectedDate.toISOString().split('T')[0]}
+        </h2>
+        {graphImage && (
+          <div>
+            <img src={graphImage} alt="Graph" />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default MyCalendar;
+
 
 
