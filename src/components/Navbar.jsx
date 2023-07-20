@@ -44,14 +44,7 @@ const Navbar = () => {
                   Calendario
                 </Link>
               </li>
-              <li className="flex items-center">
-                <Link
-                  className="text-white flex items-center py-2 px-4 rounded-xl transition-all hover:bg-indigo-900 gap-4"
-                  to="/layout/contact"
-                >
-                  Resumen
-                </Link>
-              </li>
+              
             </ul>
           </nav>
           <div className='flex flex-col gap-4'>

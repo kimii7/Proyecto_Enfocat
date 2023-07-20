@@ -7,7 +7,7 @@ const Fotter = () => {
     <div>
       <footer className='bg-neutral-600 mt-20'>
         <div className='flex flex-row justify-around items-center h-10'>
-        <div className='text-white w-3/5'> </div>
+        <div className='text-white sm:3/3 md:w-3/5'> </div>
           <div className='text-white flex flex-row gap-10'> <img src={phone} alt="" className='w-7' /> <img src={email} alt="" className='w-7 text-white' /> <img src={github} alt="" className='w-7' /></div>
           
 

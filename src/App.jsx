@@ -4,7 +4,7 @@
 
  import Home from "./components/Home"
  import About from "./components/About"
- import Contact from "./components/Contact"
+ 
  
  import PaginaInicio from "./components/PaginaInicio";
  import ContactoInicio from "./components/ContactoInicio"
@@ -37,7 +37,7 @@ function App() {
           <Route path="/layout" element={<Home />} />
           
           <Route path="/layout/about" element={<About />} />
-          <Route path="/layout/contact" element={<Contact />} />
+          
         
         </Route>
 

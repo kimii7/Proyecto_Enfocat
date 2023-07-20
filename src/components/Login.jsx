@@ -191,6 +191,7 @@ const Login = () => {
           </div>
           <button
             type='submit'
+            onClick={handleSubmit}
             className='md:w-40 bg-indigo-700 m-auto rounded-lg p-3 shadow-md focus:ring-4 hover:bg-sky-400 transition-colors'
           >
             Iniciar sesión
