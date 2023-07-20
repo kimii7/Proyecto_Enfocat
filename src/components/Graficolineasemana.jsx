@@ -1,47 +1,64 @@
 import React, { useEffect, useState } from "react";
-import { Line } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import axios from "axios";
+
+export default function GraficoLineasMes() {
 
 const client = axios.create({
   baseURL: 'http://127.0.0.1:8000'
 });
 
-const fetchData = async (asignatura_Id) => {
-  try {
-    const response = await client.get(`/api/showMonthRecords/${asignatura_Id}`);
-    const data = response.data;
-    console.log(data[0]['fecha']);
+const [Asignaturas, setAsignaturas] = useState([]);
 
-    const fechas = data.map((item) => item.fecha);
+const getAsignaturas = async () => {
+  try{
+    const response = await client.get(`/api/asignaturas/1`)
+    const data = response.data;
+    const asignatura_id = data.map((item) => item.id);
+    const asignatura_nombre = data.map((item) => item.nombre);
+
+    var asignatura = [];
+
+    for(let i=0; i < asignatura_id.length; i++){
+      asignatura.push([asignatura_id[i], asignatura_nombre[i]]);
+    }
+
+    setAsignaturas(asignatura);
+
+  } catch (error) {
+    return null;
+  }
+}
+
+useEffect(() => {
+  getAsignaturas();
+}, []);
+
+  const fetchData = async (asignatura_Id) => {
+  try {
+    const response = await client.get(`/api/showByAsignatura`, { params: {usuario_id:1, asignatura_id:asignatura_Id}});
+    const data = response.data;
+
     const contentos = data.map((item) => item.contentos);
     const desanimados = data.map((item) => item.desanimados);
 
-    console.log(fechas);
-    console.log(contentos);
-    console.log(desanimados);
+    var totalContentos = 0;
+    var totalDesanimados = 0;
+
+    contentos.forEach(function(contento){
+      totalContentos += contento
+    })
+
+    desanimados.forEach(function(desanimado){
+      totalDesanimados += desanimado
+    })
 
     const chartData = {
-      labels: fechas,
+      labels: ["Contentos", "Desanimados"],
       datasets: [
         {
-          label: 'Contentos',
-          data: contentos,
-          tension: 0.4,
-          borderColor: '#81A684',
-          pointRadius: 6,
-          pointBackgroundColor: '#0E0F19',
-          backgroundColor: 'rgba(135, 165, 255, 0.3)',
-          fill: true,
-        },
-        {
-          label: 'Desanimados',
-          data: desanimados,
-          tension: 0.4,
-          borderColor: '#81A684',
-          pointRadius: 6,
-          pointBackgroundColor: '#0E0F19',
-          backgroundColor: 'rgba(135, 31, 255, 0.8)',
-          fill: true,
+          data: [totalContentos, totalDesanimados],
+          backgroundColor: ["green", "red"],
         },
       ],
     };
@@ -53,7 +70,6 @@ const fetchData = async (asignatura_Id) => {
   }
 };
 
-export default function GraficoLineasMes() {
   const [chartData, setChartData] = useState(null);
   const [selectedAsignatura, setSelectedAsignatura] = useState("");
 
@@ -72,28 +88,18 @@ export default function GraficoLineasMes() {
 
   const options = {
     responsive: true,
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-    },
   };
 
   return (
     <div>
       <select value={selectedAsignatura} onChange={handleAsignaturaChange}>
-        <option value="">Seleccionar Asignatura</option>
-        <option value="1">Asignatura 1</option>
-        <option value="2">Asignatura 2</option>
+        <option value="0">Seleccionar Asignatura</option>
+        {Asignaturas.map((fila, elemento) => (
+          <option value={fila[0]}>{fila[1]}</option>
+        ))}
         {/* Agrega más opciones de asignaturas según tu caso */}
       </select>
-      <button onClick={fetchDataAndSetChartData}>Filtrar</button>
-      {chartData && <Line data={chartData} options={options} />}
+      {chartData && <Pie data={chartData} options={options} />}
     </div>
   );
 }

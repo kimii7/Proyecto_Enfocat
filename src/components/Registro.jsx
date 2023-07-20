@@ -19,7 +19,7 @@ const Registro = () => {
         var getUrl = window.location;
                 var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
                 window.location = baseUrl;
-      }
+    }
 
     // useEffect(() => {
     //     client.get('/api/user')

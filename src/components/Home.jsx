@@ -18,7 +18,6 @@ function Home() {
       <div className="bg-black">
         <div className="md:grid md:grid-cols-2 bg-black grid">
           <div className="bg-indigo-100 p-8 rounded-md m-5 md:col-span-1 col-span-2  shadow-md landscape-styles    ">
-            <Dropdown className="bg-slate-100 hover:bg-slate-50" />
             <GraficoBarras />
           </div>
   
@@ -31,7 +30,6 @@ function Home() {
           </div>
   
           <div className="bg-indigo-100 p-8 rounded-md m-5 col-span-2 md:col-span-1 shadow-md landscape-styles">
-            <Dropdown className="bg-slate-100 hover:bg-slate-50" />
             <GraficoPastel />
           </div>
         </div>

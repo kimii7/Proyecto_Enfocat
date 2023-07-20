@@ -14,18 +14,13 @@ const fetchData = async () => {
   try {
     const response = await client.get('/api/showMonthRecords/1');
     const data = response.data;
-    console.log(data[0]['fecha']);
 
-    const fechas = data.map((item) => item.fecha);
+    const horas = data.map((item) => item.fecha.slice(11, 16));
     const contentos = data.map((item) => item.contentos);
     const desanimados = data.map((item) => item.desanimados);
 
-    console.log(fechas);
-    console.log(contentos);
-    console.log(desanimados);
-
     const grafico = {
-      labels: fechas,
+      labels: horas,
       datasets: [
         {
           label: 'Contentos',
@@ -79,6 +74,9 @@ export default function GraficoLineasMes() {
       y: {
         beginAtZero: true,
       },
+      x: {
+        display:false,
+      },
     },
     plugins: {
       filler: {
@@ -87,6 +85,5 @@ export default function GraficoLineasMes() {
     },
   };
 
-  console.log(chartData);
   return <Line data={chartData} options={options} />;
 }

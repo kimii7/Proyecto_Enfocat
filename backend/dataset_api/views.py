@@ -64,6 +64,26 @@ class ShowMonth(APIView):
         serializer = EstadoAsignaturaSerializer(estadoAsignatura, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class ShowByTeacher(APIView):
+    permission_classes = (permissions.AllowAny, )
+    authentication_classes = (SessionAuthentication, )
+    def get(self, request, *args, format=None):
+        user_id = request.GET.get('usuario_id', None)
+        prof_id = request.GET.get('profesor_id', None)
+        estadoAsignatura = EstadoAsignatura.objects.filter(usuario_id=user_id, profesor_id=prof_id)
+        serializer = EstadoAsignaturaSerializer(estadoAsignatura, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class ShowByAsignment(APIView):
+    permission_classes = (permissions.AllowAny, )
+    authentication_classes = (SessionAuthentication, )
+    def get(self, request, *args, format=None):
+        user_id = request.GET.get('usuario_id', None)
+        asign_id = request.GET.get('asignatura_id', None)
+        estadoAsignatura = EstadoAsignatura.objects.filter(usuario_id=user_id, asignatura_id=asign_id)
+        serializer = EstadoAsignaturaSerializer(estadoAsignatura, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class UploadRecord(APIView):
     permission_classes = (permissions.AllowAny, )
     authentication_classes = (SessionAuthentication, )
