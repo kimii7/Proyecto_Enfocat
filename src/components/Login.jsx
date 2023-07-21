@@ -65,12 +65,12 @@ const Login = () => {
       }
 
     ).then(function (res) {
+      console.log("hola")
       localStorage.setItem('usuario', JSON.stringify(res.data));
 
-      // var usuario=localStorage.getItem('usuario');
-      // var objeto = JSON.parse(usuario.toString());
-      // console.log(objeto.user_id);
-      // window.location = "http://localhost:5174/layout";
+      var usuario=localStorage.getItem('usuario');
+      var objeto = JSON.parse(usuario.toString());
+      console.log(objeto.user_id);
       var getUrl = window.location;
       var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
       window.location = baseUrl;
@@ -136,6 +136,9 @@ const Login = () => {
     // Envío del formulario
     // Aquí puedes realizar la lógica para enviar los datos a tu backend o realizar otras acciones necesarias
     console.log('Datos del formulario:', email, password);
+
+    logearse(event)
+
   };
 
 
@@ -157,7 +160,7 @@ const Login = () => {
         <form
           action=''
           className='bg-emerald-300 z-20 flex flex-col gap-6 md:w-1/2 landscape:md:w-1/2 landscape:m-auto m-auto rounded-md p-8 opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg shadow-lg'
-          onSubmit={logearse}
+          
         >
           <h1>Sign up</h1>
           <input
