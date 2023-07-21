@@ -7,23 +7,46 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 import axios from "axios";
 
+export default function GraficoPastel() {
+
 const client = axios.create({
   baseURL: 'http://127.0.0.1:8000'
 });
 
-const fetchData = async () => {
-  try {
-    const response = await client.get('/api/showWeekRecords/1');
-    const data = response.data;
-    console.log(data[0]['fecha']);
+const [Profesores, setProfesores] = useState([]);
 
-    const fechas = data.map((item) => item.fecha);
+const getProfesores = async () => {
+  try{
+    const response = await client.get(`/api/profesores/1`)
+    const data = response.data;
+    const profesor_id = data.map((item) => item.id);
+    const profesor_nombre = data.map((item) => item.nombre);
+    const profesor_apellido = data.map((item) => item.apellido);
+
+    var profesor = [];
+
+    for(let i=0; i < profesor_id.length; i++){
+      profesor.push([profesor_id[i], profesor_nombre[i] + " " + profesor_apellido[i]]);
+    }
+
+    setProfesores(profesor);
+
+  } catch (error) {
+    return null;
+  }
+}
+
+useEffect(() => {
+  getProfesores();
+}, []);
+
+const fetchData = async (profesor_id) => {
+  try {
+    const response = await client.get('/api/showByTeacher', {params: {usuario_id:1, profesor_id:profesor_id}});
+    const data = response.data;
+
     const contentos = data.map((item) => item.contentos);
     const desanimados = data.map((item) => item.desanimados);
-
-    console.log(fechas);
-    console.log(contentos);
-    console.log(desanimados);
 
     var totalContentos = 0;
     var totalDesanimados = 0;
@@ -35,8 +58,6 @@ const fetchData = async () => {
     desanimados.forEach(function(desanimado){
       totalDesanimados += desanimado
     })
-
-    
 
     const grafico = {
       labels: ["Contentos", "Desanimados"],
@@ -55,26 +76,36 @@ const fetchData = async () => {
   }
 };
 
-export default function GraficoDonutSemana() {
   const [chartData, setChartData] = useState(null);
+  const [selectedProfesor, setSelectedProfesor] = useState("");
+
+    const handleProfesorChange = (event) => {
+    setSelectedProfesor(event.target.value);
+  };
+
+  const fetchDataAndSetChartData = async () => {
+    const data = await fetchData(selectedProfesor);
+    setChartData(data);
+  };
 
   useEffect(() => {
-    const fetchDataAndSetChartData = async () => {
-      const data = await fetchData();
-      setChartData(data);
-    };
-
     fetchDataAndSetChartData();
-  }, []);
-
-  if (!chartData) {
-    return null;
-  }
+  }, [selectedProfesor]);
 
   const options = {
     responsive: true,
   };
 
-  console.log(chartData)
-  return <Pie data={chartData} options={options} />;
+  return (
+    <div>
+      <select value={selectedProfesor} onChange={handleProfesorChange}>
+        <option value="0">Seleccionar Profesor</option>
+        {Profesores.map((fila, elemento) => (
+          <option value={fila[0]}>{fila[1]}</option>
+        ))}
+        {/* Agrega más opciones de asignaturas según tu caso */}
+      </select>
+      {chartData && <Pie data={chartData} options={options} />}
+    </div>
+    );
 }

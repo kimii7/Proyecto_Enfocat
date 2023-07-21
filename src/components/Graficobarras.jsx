@@ -29,16 +29,10 @@ import {
     try {
       const response = await client.get('/api/showMonthRecords/1');
       const data = response.data;
-      console.log(data[0]['fecha']);
-  
-      const fechas = data.map((item) => item.fecha);
+
       const contentos = data.map((item) => item.contentos);
       const desanimados = data.map((item) => item.desanimados);
-  
-      console.log(fechas);
-      console.log(contentos);
-      console.log(desanimados);
-  
+
       var totalContentos = 0;
       var totalDesanimados = 0;
   
@@ -88,7 +82,5 @@ import {
     const options = {
       responsive: true,
     };
-  
-    console.log(chartData)
     return   <Bar data={chartData} options={options} className="w-screen"/>;
   }
