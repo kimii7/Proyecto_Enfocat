@@ -1,0 +1,14 @@
+[
+  {
+    "Emocion":"Felicidad",
+    "Cantidad":8
+  },
+  {
+    "Emocion":"Ira",
+    "Cantidad":4
+  },
+  {
+    "Emocion":"Tristeza",
+    "Cantidad":11
+  }
+]

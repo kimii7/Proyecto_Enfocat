@@ -37,8 +37,11 @@ class EstadoAsignatura(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    contentos = models.IntegerField(default=0)
-    desanimados = models.IntegerField(default=0)
+    felicidad = models.IntegerField(default=0)
+    tristeza = models.IntegerField(default=0)
+    ira = models.IntegerField(default=0)
+    odio = models.IntegerField(default=0)
+    sorpresa = models.IntegerField(default=0)
     fecha = models.DateTimeField(default=hoy)
     asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
     profesor = models.ForeignKey(Profesor, on_delete=models.CASCADE)

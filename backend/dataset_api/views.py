@@ -16,6 +16,8 @@ from django.db.models.functions import ExtractMonth
 
 from django.db.models import Q
 
+import subprocess
+
 # Create your views here.
 class ShowAll(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -88,12 +90,15 @@ class UploadRecord(APIView):
     permission_classes = (permissions.AllowAny, )
     authentication_classes = (SessionAuthentication, )
     def post(self, request, format=None):
-        serializer = EstadoAsignaturaSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            record = serializer.create(request.data)
-            if record:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        script_path = 'static/data/reconocimiento_emociones.py'
+        result = subprocess.run(['python', script_path], capture_output=True, text=True)
+        output = result.stdout
+        # serializer = EstadoAsignaturaSerializer(data=request.data)
+        # if serializer.is_valid(raise_exception=True):
+        #     record = serializer.create(request.data)
+        #     if record:
+        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(output ,status=status.HTTP_201_CREATED)
 
 class getProfesores(APIView):
     permission_classes = (permissions.AllowAny, )
