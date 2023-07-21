@@ -79,6 +79,14 @@ export default function GraficoLineasMes() {
       },
     },
     plugins: {
+      title: {
+        display: true,
+        text: "Evolución del mes",
+        font:{
+          size: 35,
+        }
+      },
+
       filler: {
         propagate: false,
       },

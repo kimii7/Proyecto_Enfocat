@@ -81,6 +81,15 @@ import {
   
     const options = {
       responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: "Resumen del mes",
+          font:{
+            size: 35,
+          }
+        }
+      }
     };
     return   <Bar data={chartData} options={options} className="w-screen"/>;
   }

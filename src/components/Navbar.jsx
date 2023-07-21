@@ -1,8 +1,22 @@
+import { useState } from 'react';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal, Ripple, initTE } from 'tw-elements';
+import axios from 'axios';
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = 'true';
+const usuario = JSON.parse(localStorage.getItem('usuario'));
+const client = axios.create({
+  baseURL: 'http://127.0.0.1:8000'
+});
 
+// asignatura = document.getElementById('asignatura').value;
 const Navbar = () => {
+  const [miasignatura, setmMiasignatura] = useState('');
+  const [nombre, setNombre] = useState ('');
+  const [apellidos, setApellidos] = useState ('');
+
   useEffect(() => {
     initTE({ Modal, Ripple });
   }, []);
@@ -13,15 +27,45 @@ const Navbar = () => {
     window.location.href = baseUrl;
   };
 
+  // urlAsignatura = 'api/post/asignatura'
+  // urlProfesor = 'api/post/profesor'
+  function elegirAsignatura(e) {
+    console.log(miasignatura)
+    e.preventDefault();
+    client.post(
+      'api/post/asignatura',
+      {
+        usuario_id: usuario["user_id"],
+        nombre: miasignatura,
+
+        }
+    ).then(function (res) {
+      window.location.reload();
+    });
+  }
+
+  function elNombre(e) {
+    console.log(nombre)
+    console.log(apellidos)
+    e.preventDefault();
+    client.post(
+      'api/post/profesor',
+      {
+        usuario_id: usuario["user_id"],
+        nombre: nombre,
+        apellido: apellidos,
+        }
+    ).then(function (res) {
+      window.location.reload();
+    });
+  }
+
+
   return (
     <div>
       <div className="bg-indigo-900 h-full fixed lg:w-[20%] w-[80%] left-0 top-0">
         <div className="h-[30vh] flex justify-center p-7 flex-col text-center items-center gap-4">
-          <img
-            src="https://st.depositphotos.com/1008939/1316/i/950/depositphotos_13163725-stock-photo-young-man.jpg"
-            className="w-20 h-20 object-cover rounded-full ring-2 ring-orange-200"
-            alt="Profile"
-          />
+          
           <h1 className="text-2xl text-white font-bold">Daniel Ferrer</h1>
           <p className="text-white bg-primary-100 py-1 px-3 rounded-full">Mi perfil</p>
         </div>
@@ -44,7 +88,7 @@ const Navbar = () => {
                   Calendario
                 </Link>
               </li>
-              
+
             </ul>
           </nav>
           <div className='flex flex-col gap-4'>
@@ -60,7 +104,7 @@ const Navbar = () => {
             </a>
             <a
               href="#"
-              
+
               className="inline-block rounded-md bg-primary hover:bg-indigo-900 px-6 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
               data-te-toggle="modal"
               data-te-target="#exampleModal2"
@@ -78,7 +122,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div
+      <form
         data-te-modal-init
         className="fixed  left-0 top-60 w-[90%] rounded-md  mx-5  z-[1055] hidden h-full  overflow-y-auto overflow-x-hidden outline-none"
         id="exampleModal"
@@ -116,7 +160,8 @@ const Navbar = () => {
 
             <div className="relative flex-auto p-4" data-te-modal-body-ref>
               Nombre de la asignatura
-              <input type="text" className='rounded-md p-2 ml-5'/>
+              <input type="text" id='asignatura' className='rounded-md p-2 ml-5' value={miasignatura}
+                onChange={(e) => setmMiasignatura(e.target.value)} />
             </div>
 
             <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
@@ -130,7 +175,8 @@ const Navbar = () => {
                 Close
               </button>
               <button
-                type="button"
+                onClick={elegirAsignatura}
+                type="submit"
                 className="ml-1 inline-block rounded bg-sky-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-sky-300 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                 data-te-ripple-init
                 data-te-ripple-color="light"
@@ -140,8 +186,8 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div
+      </form>
+      <form
         data-te-modal-init
         className="fixed  left-0 top-60 w-[90%]   mx-5 z-[1055]   hidden h-full  overflow-y-auto overflow-x-hidden outline-none"
         id="exampleModal2"
@@ -178,10 +224,12 @@ const Navbar = () => {
             </div>
 
             <div className="relative flex-auto p-4" data-te-modal-body-ref>
-              <p>Introduce tu nombre</p>
-              <input type="text" className='rounded-md p-2 ml-5 my-5'/>
-              <p>Introduce tu nombre y apellidos</p>
-              <input type="text" className='rounded-md p-2 ml-5 my-5'/>
+              <p>Introduce el nombre</p>
+              <input type="text" className='rounded-md p-2 ml-5 my-5' value={nombre}
+                onChange={(e) => setNombre(e.target.value)}/>
+              <p>Introduce los apellidos</p>
+              <input type="text" className='rounded-md p-2 ml-5 my-5' value={apellidos}
+                onChange={(e) => setApellidos(e.target.value)}/>
             </div>
 
             <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
@@ -195,7 +243,8 @@ const Navbar = () => {
                 Close
               </button>
               <button
-                type="button"
+              onClick={elNombre}
+                type="submit"
                 className="ml-1 inline-block rounded bg-sky-700 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-sky-300 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                 data-te-ripple-init
                 data-te-ripple-color="light"
@@ -205,7 +254,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
