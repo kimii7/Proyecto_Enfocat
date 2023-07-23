@@ -50,4 +50,11 @@
     border-radius: 5% !important;
 }
 
-  
+
+  @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+
+
+.fuente{
+    font-family: 'Comfortaa', cursive;
+}
