@@ -9,10 +9,11 @@ const client = axios.create({
 });
 
 const [Asignaturas, setAsignaturas] = useState([]);
-
+const usuario = JSON.parse(localStorage.getItem('usuario'));
+  const usuario_id = usuario["user_id"]
 const getAsignaturas = async () => {
   try{
-    const response = await client.get(`/api/asignaturas/1`)
+    const response = await client.get(`/api/asignaturas/${usuario_id}`)
     const data = response.data;
     const asignatura_id = data.map((item) => item.id);
     const asignatura_nombre = data.map((item) => item.nombre);
