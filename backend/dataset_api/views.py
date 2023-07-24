@@ -18,8 +18,8 @@ from django.db.models import Q
 
 import json
 
-#imports data
 from .data.reconocimiento_emociones import ejecutar_script
+
 # Create your views here.
 class ShowAll(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -93,11 +93,11 @@ class UploadRecord(APIView):
     authentication_classes = (SessionAuthentication, )
     def post(self, request, format=None):
         data = request.data
-
-        emociones_dic = { "felicidad": 0, "tristeza": 0, "odio": 0, "ira": 0, "sorpresa": 0}
+        emociones_dic = { "felicidad": 0, "tristeza": 0, "odio": 0, "ira": 0, "sorpresa": 0, "neutral": 0}
+        
         result = ejecutar_script()
         emociones = json.loads(result)
-
+        
         for diccionario in emociones:
             emocion = diccionario["Emocion"].lower()
             cantidad = diccionario["Cantidad"]
@@ -111,8 +111,6 @@ class UploadRecord(APIView):
             if estado:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
-
-        return Response(data ,status=status.HTTP_201_CREATED)
 
 class getProfesores(APIView):
     permission_classes = (permissions.AllowAny, )
