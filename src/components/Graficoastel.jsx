@@ -45,28 +45,46 @@ const fetchData = async (profesor_id) => {
     const response = await client.get('/api/showByTeacher', {params: {usuario_id:1, profesor_id:profesor_id}});
     const data = response.data;
 
-    const contentos = data.map((item) => item.contentos);
-    const desanimados = data.map((item) => item.desanimados);
+    const contentos = data.map((item) => item.felicidad);
+    const desanimados = data.map((item) => item.tristeza);
+    const iracundos = data.map((item) => item.ira);
+    const odiosos = data.map((item) => item.odio);
+    const sorprendidos = data.map((item) => item.sorpresa);
 
     var totalContentos = 0;
     var totalDesanimados = 0;
+    var totalIra = 0;
+    var totalOdio = 0;
+    var totalSorprendidos = 0;
 
-    contentos.forEach(function(contento){
-      totalContentos += contento
+    contentos.forEach(function (contento) {
+        totalContentos += contento
     })
 
-    desanimados.forEach(function(desanimado){
-      totalDesanimados += desanimado
+    desanimados.forEach(function (desanimado) {
+        totalDesanimados += desanimado
+    })
+
+    iracundos.forEach(function (ira) {
+        totalIra += ira
+    })
+
+    odiosos.forEach(function (odio) {
+        totalOdio += odio
+    })
+
+    sorprendidos.forEach(function (sorprendido) {
+        totalSorprendidos += sorprendido
     })
 
     const grafico = {
-      labels: ["Contentos", "Desanimados"],
-      datasets: [
-        {
-          data: [totalContentos, totalDesanimados],
-          backgroundColor: ["green", "red"],
-        },
-      ],
+        labels: ["Contentos", "Desanimados", "Ira", "Odio", "Sorprendidos"],
+        datasets: [
+            {
+                data: [totalContentos, totalDesanimados, totalIra, totalOdio, totalSorprendidos],
+                backgroundColor: ["green", "blue", "red", "black", "yellow"],
+            },
+        ],
     };
 
     return grafico;

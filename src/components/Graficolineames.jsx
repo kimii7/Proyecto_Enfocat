@@ -16,8 +16,11 @@ const fetchData = async () => {
     const data = response.data;
 
     const horas = data.map((item) => item.fecha.slice(11, 16));
-    const contentos = data.map((item) => item.contentos);
-    const desanimados = data.map((item) => item.desanimados);
+    const contentos = data.map((item) => item.felicidad);
+    const desanimados = data.map((item) => item.tristeza);
+    const iracundos = data.map((item) => item.ira);
+    const odiosos = data.map((item) => item.odio);
+    const sorprendidos = data.map((item) => item.sorpresa);
 
     const grafico = {
       labels: horas,
@@ -41,7 +44,37 @@ const fetchData = async () => {
           pointBackgroundColor: '#0E0F19',
           backgroundColor: 'rgba(135, 31, 255, 0.8)',
           fill: true,
-        }
+        },
+        {
+          label: 'Ira',
+          data: iracundos,
+          tension: 0.4,
+          borderColor: '#81A684',
+          pointRadius: 6,
+          pointBackgroundColor: '#0E0F19',
+          backgroundColor: 'rgba(255, 0, 0, 0.3)',
+          fill: true,
+        },
+        {
+          label: 'Odio',
+          data: odiosos,
+          tension: 0.4,
+          borderColor: '#81A684',
+          pointRadius: 6,
+          pointBackgroundColor: '#0E0F19',
+          backgroundColor: 'rgba(180, 180, 180, 0.3)',
+          fill: true,
+        },
+        {
+          label: 'Sorprendidos',
+          data: sorprendidos,
+          tension: 0.4,
+          borderColor: '#81A684',
+          pointRadius: 6,
+          pointBackgroundColor: '#0E0F19',
+          backgroundColor: 'rgba(229, 190, 1, 0.3)',
+          fill: true,
+        },
       ],
     };
 
