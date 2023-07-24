@@ -4,7 +4,7 @@ from rest_framework import serializers
 class EstadoAsignaturaSerializer(serializers.ModelSerializer):
     class Meta:
         model = EstadoAsignatura
-        fields = ['usuario_id','asignatura_id','profesor_id','fecha','contentos','desanimados']
+        fields = ['usuario_id','asignatura_id','profesor_id','fecha','ira','odio','tristeza','felicidad','sorpresa', 'neutral']
 
 class ProfesorSerializer(serializers.ModelSerializer):
     class Meta:
