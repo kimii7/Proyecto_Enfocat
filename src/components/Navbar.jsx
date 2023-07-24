@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Formselect from './Formselect';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal, Ripple, initTE } from 'tw-elements';
@@ -60,14 +61,17 @@ const Navbar = () => {
     });
   }
 
+  const nombreUsuario = usuario['username'];
+  const email = usuario['email'];
+  
 
   return (
     <div>
       <div className="bg-indigo-900 h-full fixed lg:w-[20%] w-[80%] left-0 top-0">
         <div className="h-[30vh] flex justify-center p-7 flex-col text-center items-center gap-4">
           
-          <h1 className="text-2xl text-white font-bold">Daniel Ferrer</h1>
-          <p className="text-white bg-primary-100 py-1 px-3 rounded-full">Mi perfil</p>
+          <h1 className="text-2xl text-white font-bold">{nombreUsuario}</h1>
+          <p className="text-white bg-primary-100 py-1 px-3 rounded-full">{email}</p>
         </div>
         <div className="h-[70vh] p-8 rounded-tr-full bg-indigo-500 flex flex-col justify-between gap-8">
           <nav>
@@ -113,12 +117,15 @@ const Navbar = () => {
             >
               Professor
             </a>
+
+            <a href="#"> <Formselect/></a>
           </div>
           <div className="bg-indigo-700 p-4 rounded-xl shadow-md flex justify-center w-40">
             <a className="text-white text-center cursor-pointer" onClick={logout}>
               Log out
             </a>
           </div>
+           
         </div>
       </div>
 

@@ -15,14 +15,35 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const usuario = JSON.parse(localStorage.getItem('usuario'));
 
 import axios from "axios";
 
 export default function GraficoPastel() {
 
+
     const client = axios.create({
         baseURL: 'http://127.0.0.1:8000'
     });
+
+    // const [miasignatura_id, setmMiasignatura] = useState('');
+
+    function elegirAsignaturaselect(e) {
+        var miasignatura = localStorage.getItem('miasignatura');
+        e.preventDefault();
+        client.post(
+          'api/post/record',
+          {
+            usuario_id: usuario["user_id"],
+            profesor_id: selectedProfesor,
+            asignatura_id: miasignatura,
+    
+            }
+        ).then(function (res) {
+            localStorage.removeItem('miasignatura')
+            window.location.reload();
+        });
+      }
 
     const [Profesores, setProfesores] = useState([]);
 
@@ -109,7 +130,7 @@ export default function GraficoPastel() {
     const [selectedProfesor, setSelectedProfesor] = useState("");
 
     const handleProfesorChange = (event) => {
-        setSelectedProfesor(event.target.value);
+        setSelectedProfesor(event.target.value)
     };
 
     const fetchDataAndSetChartData = async () => {
@@ -188,7 +209,7 @@ export default function GraficoPastel() {
                                         <select className='flex-1 mx-5' value={selectedProfesor} onChange={handleProfesorChange}>
                                             <option value="0">Seleccionar Profesor</option>
                                             {Profesores.map((fila, elemento) => (
-                                                <option value={fila[0]}>{fila[1]}</option>
+                                                <option value={fila[0]} >{fila[1]} </option>
                                             ))}
                                             {/* Agrega más opciones de asignaturas según tu caso */}
                                         </select>
@@ -210,6 +231,7 @@ export default function GraficoPastel() {
                                     Close
                                 </button>
                                 <button
+                                    onClick={elegirAsignaturaselect}
                                     type="button"
                                     class="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                                     data-te-ripple-init

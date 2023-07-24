@@ -11,6 +11,8 @@ import migrafico from '../assets/migrafico.png'
 import phone from '../assets/phone.png'
 import email from '../assets/email.png'
 
+import escritorio from '../assets/escritorio.png'
+
 import Fotter from './Fotter'
 import dashboard from '../assets/dashboard.png'
 import CountUp from 'react-countup';
@@ -25,9 +27,9 @@ import { fadeIn } from '../variants'
 const PaginaInicio = () => {
 
   const contentos = 23;
-  const desanimados = 7;
-  const distraidos = 12;
-  const ira = 3;
+  const desanimados = 27;
+  const distraidos = 60;
+  const ira = 40;
   const [ref, inView] = useInView({
     threshold: 0.5,
   })
@@ -44,17 +46,20 @@ const PaginaInicio = () => {
         <MenuTailwind />
         <main className='grid md:grid-cols-2 mt-40 md:mt-20 mx-10'>
           <div className='grid md:col-span-1 m-5 '>
-            <motion.h1 variants={fadeIn('right', 0.2)} initial="hidden" whileInView={'show'} viewport={{ once: false, amount: 0.3 }} className='flex justify-center items-center text-[55px] font-bold leading-[0.8]  lg:text-[110px] text-indigo-400'>Mejora tus classes!</motion.h1>
+            <motion.h1 variants={fadeIn('right', 0.2)} initial="hidden" whileInView={'show'} viewport={{ once: false, amount: 0.3 }} className='flex justify-center items-center text-[55px] font-bold leading-[0.8]  lg:text-[110px] text-indigo-400 mb-4'>Mejora tus classes!</motion.h1>
             <p className='mt-20 md:mt-0 text-[20px] text-indigo-900'>A partir de ahora, podras saber el estado de animo de tus alumnos, y asi poder mejorar tus clases y organizar tua agenda. Tambien podras tener una vision futura de como seran tus clases.</p>
+            <h3 className='leading-[0.8] font-bold text-2xl text-indigo-400 my-5'>Tus porcentajes</h3>
+            
             <div className='md:grid md:grid-cols-4 gap-4 my-7 m-auto'>
-              <div className='shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl flex flex-col gap-2 h-40'><CountUp start={-20} end={contentos} duration={7} separator="," className='text-2xl mx-16' /> <br /> <p className='m-auto font-bold leading-[0.8] text-2xl text-green-600'>Contentos</p></div>
+              
+              <div className='shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl flex flex-col gap-2 h-40'><CountUp start={-20} end={contentos} duration={7} separator="," className='text-2xl mx-16' /> <br /> <p className='hover:transform-125 m-auto font-bold leading-[0.8] text-2xl text-green-600'>Contentos</p></div>
               <div className='shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl flex flex-col gap-2 h-40'><CountUp start={-20} end={desanimados} duration={7} separator="," className='text-2xl mx-16' /> <br /> <p className='m-auto font-bold leading-[0.8] text-2xl text-orange-500'>desanimados</p></div>
               <div className='shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg flex rounded-xl flex-col gap-2 h-40'><CountUp start={-20} end={distraidos} duration={7} separator="," className='text-2xl mx-16' /> <br /> <p className=' m-auto font-bold leading-[0.8] text-2xl  text-indigo-500'>distraidos</p></div>
               <div className='shadow-lg opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg flex rounded-xl flex-col gap-2 h-40'><CountUp start={-20} end={ira} duration={7} separator="," className='text-2xl mx-16' /><br /> <p className='m-auto font-bold leading-[0.8] text-2xl text-red-600'>ira</p></div>
             </div>
           </div>
           <motion.div variants={fadeIn('left', 0.2)} initial="hidden" whileInView={'show'} viewport={{ once: false, amount: 0.3 }} className='grid md:col-span-1 bg-fondo2 bg-indigo-400'>
-            <img src={escuela} alt='Escuela' />
+            <img src={escritorio} alt='Escuela' />
           </motion.div>
 
           

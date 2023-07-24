@@ -9,20 +9,6 @@ const client = axios.create({
 });
 
 
-// function elegirAsignaturaselect(e) {
-//     console.log(miasignatura)
-//     e.preventDefault();
-//     client.post(
-//       'api/post/asignatura',
-//       {
-//         usuario_id: usuario["user_id"],
-//         nombre: miasignatura,
-
-//         }
-//     ).then(function (res) {
-//       window.location.reload();
-//     });
-//   }
 
 const [Asignaturas, setAsignaturas] = useState([]);
 
@@ -109,13 +95,14 @@ useEffect(() => {
 
   const handleAsignaturaChange = (event) => {
     setSelectedAsignatura(event.target.value);
+    
   };
 
   const fetchDataAndSetChartData = async () => {
     const data = await fetchData(selectedAsignatura);
     setChartData(data);
   };
-
+  localStorage.setItem('miasignatura', selectedAsignatura);
   useEffect(() => {
     fetchDataAndSetChartData();
   }, [selectedAsignatura]);
@@ -129,7 +116,7 @@ useEffect(() => {
       <select value={selectedAsignatura} onChange={handleAsignaturaChange}>
         <option value="0">Seleccionar Asignatura</option>
         {Asignaturas.map((fila, elemento) => (
-          <option value={fila[0]}>{fila[1]}</option>
+          <option value={fila[0]}  >{fila[1]}</option>
         ))}
         {/* Agrega más opciones de asignaturas según tu caso */}
       </select>
