@@ -92,7 +92,7 @@ def ejecutar_script():
 
             # Almacenar las emociones detectadas
             df_emociones = pd.concat([df_emociones, pd.DataFrame({'Emocion': [predicted_emotion]})], ignore_index=True)
-
+            
             # Mostrar la emoción predicha en la imagen
             cv2.putText(frame, predicted_emotion, (x, y - 5), 1, 1.3, (255, 255, 0), 1, cv2.LINE_AA)
 
@@ -134,4 +134,4 @@ def ejecutar_script():
     # Exportar el DataFrame a un archivo JSON
     df_emotion_summary.to_json('emotion_summary_{}-{}-{}_{}h{}.json'.format(fecha.year,fecha.month,fecha.day,fecha.hour,fecha.minute), orient='records', indent=2)
 
-    return df_emotion_summary
+    return df_emotion_summary.to_json(orient="records")

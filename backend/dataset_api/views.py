@@ -16,8 +16,10 @@ from django.db.models.functions import ExtractMonth
 
 from django.db.models import Q
 
-import subprocess
+import json
 
+#imports data
+from .data.reconocimiento_emociones import ejecutar_script
 # Create your views here.
 class ShowAll(APIView):
     permission_classes = (permissions.AllowAny, )
@@ -90,15 +92,27 @@ class UploadRecord(APIView):
     permission_classes = (permissions.AllowAny, )
     authentication_classes = (SessionAuthentication, )
     def post(self, request, format=None):
-        script_path = 'static/data/reconocimiento_emociones.py'
-        result = subprocess.run(['python', script_path], capture_output=True, text=True)
-        output = result.stdout
-        # serializer = EstadoAsignaturaSerializer(data=request.data)
-        # if serializer.is_valid(raise_exception=True):
-        #     record = serializer.create(request.data)
-        #     if record:
-        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(output ,status=status.HTTP_201_CREATED)
+        data = request.data
+
+        emociones_dic = { "felicidad": 0, "tristeza": 0, "odio": 0, "ira": 0, "sorpresa": 0}
+        result = ejecutar_script()
+        emociones = json.loads(result)
+
+        for diccionario in emociones:
+            emocion = diccionario["Emocion"].lower()
+            cantidad = diccionario["Cantidad"]
+            emociones_dic[emocion] = cantidad
+        
+        data.update(emociones_dic)
+
+        serializer = EstadoAsignaturaSerializer(data = data)
+        if serializer.is_valid(raise_exception=True):
+            estado = serializer.create(data)
+            if estado:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(data ,status=status.HTTP_201_CREATED)
 
 class getProfesores(APIView):
     permission_classes = (permissions.AllowAny, )
