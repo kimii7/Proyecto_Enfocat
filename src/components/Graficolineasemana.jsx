@@ -39,8 +39,8 @@ useEffect(() => {
     const response = await client.get(`/api/showByAsignatura`, { params: {usuario_id:1, asignatura_id:asignatura_Id}});
     const data = response.data;
 
-    const contentos = data.map((item) => item.contentos);
-    const desanimados = data.map((item) => item.desanimados);
+    const contentos = data.map((item) => item.felicidad);
+    const desanimados = data.map((item) => item.ira);
 
     var totalContentos = 0;
     var totalDesanimados = 0;

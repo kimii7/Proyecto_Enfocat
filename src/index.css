@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 .bg-fondo1 {
     border-radius: 0% 100% 60% 40% / 70% 31% 69% 30%  ;
@@ -49,9 +51,6 @@
 .redondeo{
     border-radius: 5% !important;
 }
-
-
-  @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
 
 

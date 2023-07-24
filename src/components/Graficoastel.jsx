@@ -45,8 +45,8 @@ const fetchData = async (profesor_id) => {
     const response = await client.get('/api/showByTeacher', {params: {usuario_id:1, profesor_id:profesor_id}});
     const data = response.data;
 
-    const contentos = data.map((item) => item.contentos);
-    const desanimados = data.map((item) => item.desanimados);
+    const contentos = data.map((item) => item.felicidad);
+    const desanimados = data.map((item) => item.ira);
 
     var totalContentos = 0;
     var totalDesanimados = 0;

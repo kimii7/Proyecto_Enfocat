@@ -16,8 +16,8 @@ const fetchData = async () => {
     const data = response.data;
 
     const horas = data.map((item) => item.fecha.slice(11, 16));
-    const contentos = data.map((item) => item.contentos);
-    const desanimados = data.map((item) => item.desanimados);
+    const contentos = data.map((item) => item.felicidad);
+    const desanimados = data.map((item) => item.ira);
 
     const grafico = {
       labels: horas,
