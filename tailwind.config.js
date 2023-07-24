@@ -6,6 +6,11 @@ export default {
     
   ],
   theme: {
+    fontFamily: {
+      primary: 'Orbitron',
+      secondary: 'Rajdhani',
+      tertiary: 'Aldrich',
+    },
     extend: {},
   },
   plugins: [],
