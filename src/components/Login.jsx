@@ -55,27 +55,54 @@ const Login = () => {
     });
   }
 
+
   function logearse(e) {
-    e.preventDefault();
-    client.post(
-      '/api/login',
-      {
-        email: email,
-        password: password
-      }
+    try {
+        e.preventDefault();
+        client.post('/api/login', {
+            email: email,
+            password: password
+        }).then(function (res) {
+            console.log("hola");
+            localStorage.setItem('usuario', JSON.stringify(res.data));
 
-    ).then(function (res) {
-      console.log("hola")
-      localStorage.setItem('usuario', JSON.stringify(res.data));
+            var usuario = localStorage.getItem('usuario');
+            var objeto = JSON.parse(usuario.toString());
+            console.log(objeto.user_id);
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
+            window.location = baseUrl;
+        }).catch(function (error) {
+            alert("Error en la función logearse:", error);
+            // Puedes mostrar un mensaje de error o realizar alguna acción específica en caso de fallo.
+        });
+    } catch (error) {
+        alert("Error en la función logearse:", error);
+        // En caso de que ocurra algún error de forma síncrona, este bloque catch lo capturará.
+    }
+}
 
-      var usuario=localStorage.getItem('usuario');
-      var objeto = JSON.parse(usuario.toString());
-      console.log(objeto.user_id);
-      var getUrl = window.location;
-      var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
-      window.location = baseUrl;
-    })
-  }
+  // function logearse(e) {
+  //   e.preventDefault();
+  //   client.post(
+  //     '/api/login',
+  //     {
+  //       email: email,
+  //       password: password
+  //     }
+
+  //   ).then(function (res) {
+  //     console.log("hola")
+  //     localStorage.setItem('usuario', JSON.stringify(res.data));
+
+  //     var usuario=localStorage.getItem('usuario');
+  //     var objeto = JSON.parse(usuario.toString());
+  //     console.log(objeto.user_id);
+  //     var getUrl = window.location;
+  //     var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
+  //     window.location = baseUrl;
+  //   })
+  // }
 
   function logout(e) {
     e.preventDefault();
