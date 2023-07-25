@@ -35,52 +35,45 @@ const Registro = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-
     function Registrarse(e) {
-        console.log(email)
+        console.log(email);
         e.preventDefault();
-        client.post(
-            '/api/register',
-            {
+    
+        client.post('/api/register', {
+            email: email,
+            username: username,
+            password: password
+        }).then(function (res) {
+            client.post('/api/login', {
                 email: email,
-                username: username,
                 password: password
-            }
-        ).then(function (res) {
-            client.post(
-                '/api/login',
-                {
-                    email: email,
-                    password: password
-                }
-
-            ).then(function (res) {
+            }).then(function (res) {
                 localStorage.setItem('usuario', JSON.stringify(res.data));
-
-                // var usuario=localStorage.getItem('usuario');
+    
+                // var usuario = localStorage.getItem('usuario');
                 // var objeto = JSON.parse(usuario.toString());
                 // console.log(objeto.user_id);
                 // window.location = "http://localhost:5174/layout";
+    
                 var getUrl = window.location;
                 var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
                 window.location = baseUrl;
-            })
+            }).catch(function (error) {
+                var miErrorDiv = document.getElementById('errorregistro');
+                miErrorDiv.innerText = "Error en el inicio de sesión: "
+            });
+        }).catch(function (error) {
+            var miErrorDiv = document.getElementById('errorregistro');
+            miErrorDiv.innerText = "Error en el inicio de sesión: "
         });
     }
+    
 
-    function logearse(e) {
-        e.preventDefault();
-        client.post(
-            '/api/login',
-            {
-                email: email,
-                password: password
-            }
-        ).then(function (res) {
-            setCurrentUser(true);
-        });
-    }
+    
+
+    
+
+    
 
     function logout(e) {
         e.preventDefault();
@@ -97,7 +90,7 @@ const Registro = () => {
             <main className=' flex justify-center items-center min-h-screen'>
                 <div className='bg-fondo6 bg-orange-200 w-44 h-44 absolute left-72 z-0'></div>
                 <form action="" className=' bg-emerald-300 z-20 flex flex-col gap-6 md:w-1/2 landscape:md:w-1/2 landscape:m-auto m-auto  rounded-md p-8 opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg shadow-lg'>
-                    <h1 className='text-3xl'>Crear Cuenta</h1>
+                    <h1 className='text-3xl font-bold text-yellow-400'>Crear Cuenta <div id='errorregistro' className='text-white text-2xl'></div></h1>
                     <input type="text" placeholder="Nombre" className='rounded-md p-3 my-4 ' value={username}
                         onChange={(e) => setUsername(e.target.value)} />
                     <div id='nombre'></div>

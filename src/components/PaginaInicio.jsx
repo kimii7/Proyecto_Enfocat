@@ -59,7 +59,7 @@ const PaginaInicio = () => {
             </div>
           </div>
           <motion.div variants={fadeIn('left', 0.2)} initial="hidden" whileInView={'show'} viewport={{ once: false, amount: 0.3 }} className='grid md:col-span-1 bg-fondo2 bg-indigo-400'>
-            <img src={escritorio} alt='Escuela' />
+            <img src={escritorio} alt='Escuela' className='m-auto'/>
           </motion.div>
 
           
