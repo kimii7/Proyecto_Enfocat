@@ -104,7 +104,7 @@ const Navbar = () => {
               data-te-ripple-init
               data-te-ripple-color="light"
             >
-              Asignatura
+              Crear asignatura
             </a>
             <a
               href="#"
@@ -115,7 +115,7 @@ const Navbar = () => {
               data-te-ripple-init
               data-te-ripple-color="light"
             >
-              Professor
+              Crear profesor
             </a>
 
             <a href="#"> <Formselect/></a>
@@ -209,7 +209,7 @@ const Navbar = () => {
           <div className="min-[576px]:shadow-[0_0.5rem_1rem_rgba(#000, 0.15)]   pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-indigo-400">
             <div className="flex flex-shrink-0 items-center justify-between rounded-tr-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
               <h5 className="text-xl p-7 font-medium leading-normal text-neutral-800 dark:text-neutral-200" id="exampleModalLabel">
-                Professor
+                Profesor
               </h5>
               <button
                 type="button"

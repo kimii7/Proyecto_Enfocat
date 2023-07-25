@@ -157,7 +157,7 @@ export default function GraficoPastel() {
                     data-te-target="#exampleModal5"
                     data-te-ripple-init
                     data-te-ripple-color="light">
-                    Launch demo modal
+                    Detectar emociones
                 </button>
 
 

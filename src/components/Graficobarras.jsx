@@ -75,6 +75,7 @@ import {
           labels: ["Contentos", "Desanimados", "Ira", "Odio", "Sorprendidos"],
           datasets: [
               {
+                  label: "Emociones",
                   data: [totalContentos, totalDesanimados, totalIra, totalOdio, totalSorprendidos],
                   backgroundColor: ["green", "blue", "red", "black", "yellow"],
               },
