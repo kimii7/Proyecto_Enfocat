@@ -57,3 +57,17 @@
 .fuente{
     font-family: 'Comfortaa', cursive;
 }
+
+.inputModelos{
+    border: 1px solid black;
+}
+
+.centrado{
+    position: fixed;
+    margin: 10%;
+}
+
+
+.colorLetra{
+    color: black;
+}

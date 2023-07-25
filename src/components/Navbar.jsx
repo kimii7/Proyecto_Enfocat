@@ -131,7 +131,7 @@ const Navbar = () => {
 
       <form
         data-te-modal-init
-        className="fixed  left-0 top-60 w-[90%] rounded-md  mx-5  z-[1055] hidden h-full  overflow-y-auto overflow-x-hidden outline-none"
+        className="centrado w-[90%] rounded-md  mx-5  z-[1055] hidden h-full  overflow-y-auto overflow-x-hidden outline-none"
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
@@ -167,7 +167,7 @@ const Navbar = () => {
 
             <div className="relative flex-auto p-4" data-te-modal-body-ref>
               Nombre de la asignatura
-              <input type="text" id='asignatura' className='rounded-md p-2 ml-5' value={miasignatura}
+              <input type="text" id='asignatura' className='rounded-md inputModelos border-black p-2 ml-5' value={miasignatura}
                 onChange={(e) => setmMiasignatura(e.target.value)} />
             </div>
 
@@ -196,7 +196,7 @@ const Navbar = () => {
       </form>
       <form
         data-te-modal-init
-        className="fixed  left-0 top-60 w-[90%]   mx-5 z-[1055]   hidden h-full  overflow-y-auto overflow-x-hidden outline-none"
+        className="centrado w-[90%]   mx-5 z-[1055]   hidden h-full  overflow-y-auto overflow-x-hidden outline-none"
         id="exampleModal2"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
@@ -232,10 +232,10 @@ const Navbar = () => {
 
             <div className="relative flex-auto p-4" data-te-modal-body-ref>
               <p>Introduce el nombre</p>
-              <input type="text" className='rounded-md p-2 ml-5 my-5' value={nombre}
+              <input type="text" className='rounded-md inputModelos p-2 ml-5 my-5' value={nombre}
                 onChange={(e) => setNombre(e.target.value)}/>
               <p>Introduce los apellidos</p>
-              <input type="text" className='rounded-md p-2 ml-5 my-5' value={apellidos}
+              <input type="text" className='rounded-md inputModelos p-2 ml-5 my-5' value={apellidos}
                 onChange={(e) => setApellidos(e.target.value)}/>
             </div>
 
