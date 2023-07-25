@@ -1,6 +1,8 @@
 import Navbar from './Navbar'
 import { Outlet } from 'react-router-dom'
 import React, { useState } from 'react';
+
+import miflecha from '../assets/miflecha.png';
 const Layout = () => {
     const [sidebarVisible, setSidebarVisible] = useState(true);
 
@@ -24,7 +26,7 @@ const Layout = () => {
                 </div>
     
     
-                <button onClick={toggleSidebar} className=' fixed rounded-full bg-red-700 text-white bottom-4 right-4 text-2xl p-3'>aaaa</button>
+                <button onClick={toggleSidebar} className=' fixed rounded-full bg-indigo-700 text-white bottom-4 right-4 text-2xl p-3'><img src={miflecha} className='w-12' alt="" /> </button>
             </div>
         )
        }

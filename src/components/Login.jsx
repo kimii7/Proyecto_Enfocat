@@ -73,11 +73,12 @@ const Login = () => {
             var baseUrl = getUrl.protocol + "//" + getUrl.host + '/layout';
             window.location = baseUrl;
         }).catch(function (error) {
-            alert("Error en la función logearse:", error);
+          var miErrorDiv = document.getElementById('mierror');
+          miErrorDiv.innerText = "Error en el inicio de sesión: " ;
             // Puedes mostrar un mensaje de error o realizar alguna acción específica en caso de fallo.
         });
     } catch (error) {
-        alert("Error en la función logearse:", error);
+      miErrorDiv.innerText = "Error en la funcion de logearse: " ;
         // En caso de que ocurra algún error de forma síncrona, este bloque catch lo capturará.
     }
 }
@@ -189,7 +190,7 @@ const Login = () => {
           className='bg-emerald-300 z-20 flex flex-col gap-6 md:w-1/2 landscape:md:w-1/2 landscape:m-auto m-auto rounded-md p-8 opacity-75 bg-opacity-10 backdrop-filter backdrop-blur-lg shadow-lg'
           
         >
-          <h1>Sign up</h1>
+          <h1 className='text-indigo-500 text-3xl font-bold'>Sign up <div id='mierror' className='text-white text-2xl'></div> </h1>
           <input
             type='email'
             placeholder='Email'
