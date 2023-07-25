@@ -56,6 +56,7 @@ const fetchData = async () => {
           pointBackgroundColor: '#0E0F19',
           backgroundColor: 'rgba(135, 31, 255, 0.8)',
           fill: true,
+          hidden: true,
         },
         {
           label: 'Ira',
@@ -66,6 +67,7 @@ const fetchData = async () => {
           pointBackgroundColor: '#0E0F19',
           backgroundColor: 'rgba(255, 0, 0, 0.3)',
           fill: true,
+          hidden: true,
         },
         {
           label: 'Odio',
@@ -76,6 +78,7 @@ const fetchData = async () => {
           pointBackgroundColor: '#0E0F19',
           backgroundColor: 'rgba(180, 180, 180, 0.3)',
           fill: true,
+          hidden: true,
         },
         {
           label: 'Sorprendidos',
@@ -86,6 +89,7 @@ const fetchData = async () => {
           pointBackgroundColor: '#0E0F19',
           backgroundColor: 'rgba(229, 190, 1, 0.3)',
           fill: true,
+          hidden: true,
         },
       ],
     };
