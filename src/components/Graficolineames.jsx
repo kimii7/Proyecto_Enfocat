@@ -10,12 +10,13 @@ const client = axios.create({
   baseURL: 'http://127.0.0.1:8000'
 });
 
+var usuario_id;
 
 if(localStorage.getItem('usuario') != null){
   
   const usuario = JSON.parse(localStorage.getItem('usuario'));
 
-  const usuario_id = usuario["user_id"]
+  usuario_id = usuario["user_id"]
 }
 
   
@@ -24,7 +25,9 @@ const fetchData = async () => {
     const response = await client.get(`/api/showMonthRecords/${usuario_id}`);
     const data = response.data;
 
-    const horas = data.map((item) => item.fecha.slice(11, 16));
+    const fecha = data.map((item) => { 
+      return item.fecha.replace('T', ' ').slice(0, -6);
+    });
     const contentos = data.map((item) => item.felicidad);
     const desanimados = data.map((item) => item.tristeza);
     const iracundos = data.map((item) => item.ira);
@@ -32,7 +35,7 @@ const fetchData = async () => {
     const sorprendidos = data.map((item) => item.sorpresa);
 
     const grafico = {
-      labels: horas,
+      labels: fecha,
       datasets: [
         {
           label: 'Contentos',

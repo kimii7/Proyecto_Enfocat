@@ -25,12 +25,15 @@ import {
     baseURL: 'http://127.0.0.1:8000'
   });
   
+  var usuario_id;
+
   if(localStorage.getItem('usuario') != null){
-  
+    
     const usuario = JSON.parse(localStorage.getItem('usuario'));
-  
-    const usuario_id = usuario["user_id"]
+
+    usuario_id = usuario["user_id"]
   }
+
   const fetchData = async () => {
     try {
       const response = await client.get(`/api/showMonthRecords/${usuario_id}`); 

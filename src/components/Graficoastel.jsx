@@ -15,12 +15,15 @@ const client = axios.create({
 
 const [Profesores, setProfesores] = useState([]);
 
+var usuario_id;
+
 if(localStorage.getItem('usuario') != null){
   
   const usuario = JSON.parse(localStorage.getItem('usuario'));
 
-  const usuario_id = usuario["user_id"]
+  usuario_id = usuario["user_id"]
 }
+
 const getProfesores = async () => {
   try{
     const response = await client.get(`/api/profesores/${usuario_id}`);
