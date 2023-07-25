@@ -32,8 +32,8 @@ function Home() {
 
   return (
     <div className="bg-stone-100" id="graphContainer">
-      <div className="md:grid md:grid-cols-4">
-        <div className="bg-indigo-100 p-8 rounded-md m-5 col-span-1 shadow-lg landscape-styles">
+      <div className="md:grid md:grid-cols-2 ">
+        <div className="bg-indigo-100 p-8 rounded-md m-5 col-span-1 shadow-lg landscape-styles ">
           <h1 className="text-indigo-900 text-2xl text-center">Resumen</h1>
           <GraficoDonut />
         </div>
