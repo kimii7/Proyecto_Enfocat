@@ -54,3 +54,13 @@ Once done, you can start the frontend with the following command:
 - `npm run dev`
 
 It will most likely start on port 5173 or 5174 by default.
+
+## Data Science Instructions
+
+To run the script you will need to install the following:
+- pip install opencv-python
+- pip install numpy
+- pip install tensorflow
+- pip install keras
+- pip install pandas
+- pip install os
