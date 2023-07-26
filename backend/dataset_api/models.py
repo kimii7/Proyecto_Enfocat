@@ -20,16 +20,6 @@ class Asignatura(models.Model):
     )
     nombre = models.CharField(max_length=60)
 
-class Horario(models.Model):
-    usuario = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-    profesor = models.ForeignKey(Profesor, on_delete=models.CASCADE)
-    asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
-    dia = models.IntegerField()
-    hora = models.IntegerField()
-
 class EstadoAsignatura(models.Model):
     hoy = datetime.now()
     hoy = hoy + timedelta(hours=2)

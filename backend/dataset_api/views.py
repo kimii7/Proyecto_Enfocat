@@ -5,8 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 
-from .models import EstadoAsignatura, Profesor, Asignatura, Horario
-from .serializers import EstadoAsignaturaSerializer, ProfesorSerializer, AsignaturaSerializer, HorarioSerializer
+from .models import EstadoAsignatura, Profesor, Asignatura
+from .serializers import EstadoAsignaturaSerializer, ProfesorSerializer, AsignaturaSerializer
 
 from datetime import datetime, timedelta, date, time
 
@@ -164,12 +164,4 @@ class getAsignaturaById(APIView):
     def get(self, request, asign_id, format=None):
         asignatura = Asignatura.objects.filter(id=asign_id)
         serializer = AsignaturaSerializer(asignatura, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-class getHorario(APIView):
-    permission_classes = (permissions.AllowAny, )
-    authentication_classes = (SessionAuthentication, )
-    def get(self, request, user_id, format=None):
-        horario = Horario.objects.filter(usuario_id=user_id)
-        serializer = HorarioSerializer(horario, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

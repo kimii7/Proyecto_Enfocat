@@ -103,7 +103,7 @@ const Registro = () => {
                         <label className=''> Acepto los terminos</label>
                     </div>
                     <div>
-                        <p>Ya tienes cuenta? <Link to="/login" className='text-blue-600'>Iniciar session</Link> </p>
+                        <p>Ya tienes cuenta? <Link to="/login" className='text-blue-600'>Iniciar sesion</Link> </p>
                     </div>
                     <button type="submit" onClick={Registrarse} className='md:w-40 bg-red-200 m-auto rounded-lg p-3 shadow-md focus:ring-4 hover:bg-sky-400'>Registrarse</button>
 

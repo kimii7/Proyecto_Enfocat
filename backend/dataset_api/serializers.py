@@ -1,4 +1,4 @@
-from .models import EstadoAsignatura, Profesor, Asignatura, Horario
+from .models import EstadoAsignatura, Profesor, Asignatura
 from rest_framework import serializers
 
 class EstadoAsignaturaSerializer(serializers.ModelSerializer):
@@ -15,8 +15,3 @@ class AsignaturaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asignatura
         fields = ['id', 'usuario_id', 'nombre']
-
-class HorarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Horario
-        fields = ['id', 'dia', 'hora', 'asignatura_id', 'profesor_id', 'usuario_id']

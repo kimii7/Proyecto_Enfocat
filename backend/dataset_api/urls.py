@@ -15,5 +15,4 @@ urlpatterns = [
     path('post/asignatura', views.PostAsignatura.as_view()),
     path('asignaturas/<int:user_id>', views.getAsignaturas.as_view()),
     path('asignatura/<int:asign_id>', views.getAsignaturaById.as_view()),
-    path('horario/<int:user_id>', views.getHorario.as_view()),
 ]
