@@ -1,46 +1,56 @@
- -- INSTRUCCIONES BACKEND --
+# CleanCode
 
-Para utilizar el backend hace falta instalar las siguientes dependencias:
+## Description
 
-    - python https://www.python.org/downloads/
-    - pip install Django
-    - pip install pip install djangorestframework
-    - pip install django-cors-headers
-    - pip install mysqlclient
+This project is a collaborative effort by Ivan Ariza, Elisabet Vasco, and Daniel Ferrer. The main goal of this project is to develop an Emotional State Analyzer that assesses the emotional well-being of students in the classroom. By understanding the emotional states of students, we aim to identify areas that need improvement and create a better learning environment.
 
-Instalar mysql :
+## Current state
 
-    - segun el usuario, password y host tendras que modificar el archivo backend/backend/settings.py en el apartado DATABASES
+The project has been completed to its current state, and the instructions and project overview have been revised. The documentation also indicates that future upgrades and improvements may be considered. Please verify all the links and commands for accuracy before proceeding.
 
-Crear una database con el nombre cleanCode, en caso de ponerle otro modificar el apartado DATABASES NAME del archivo mencionado anteriormente
+## Backend Instructions
 
-Ejecutar los siguientes comandos dentro de la carpeta ./backend:
+To use the backend, you need to install the following dependencies:
 
-    - python .\manage.py makemigrations
-    - python .\manage.py migrate
+- [Python](https://www.python.org/downloads/)
+- `pip install Django`
+- `pip install djangorestframework`
+- `pip install django-cors-headers`
+- `pip install mysqlclient`
 
-Esto creara las tablas de la base de datos.
+Install MySQL:
 
-Ya podemos iniciar el servidor con el siguiente comando:
+- Depending on your user, password, and host, you may need to modify the file `backend/backend/settings.py` under the DATABASES section.
 
-    - python .\manage.py runserver 8000
+Create a database with the name "cleanCode". If you choose a different name, modify the DATABASES NAME section in the aforementioned file.
 
+Execute the following commands inside the `./backend` folder:
 
- -- INSTRUCCIONES FRONTEND --
+- `python manage.py makemigrations`
+- `python manage.py migrate`
 
-Para usar el frontend deberas instalar las siguientes dependencias:
+This will create the necessary database tables.
 
-    - instalar node js
-    - npm install vite
-    - instalar paquete react-calendar.
-    - instalar html-canvas 2.
-    - instalar react-count up.
-    - instalar react-intersection-observer.
-    - instalar react-router-doom.
-    - instalar react-chartjs-2.
-    - instalar fontawesome.
+Now, you can start the server with the following command:
 
-Una vez hecho puedes iniciar el frontend con el siguiente comando:
-    - npm run dev
+- `python manage.py runserver 8000`
 
-Se iniciara seguramente con el puerto 5173 o 5174 de forma predeterminada.
+## Frontend Instructions
+
+To use the frontend, you need to install the following dependencies:
+
+- Install [Node.js](https://nodejs.org/)
+- `npm install vite`
+- Install the `react-calendar` package.
+- Install `html-canvas 2`.
+- Install `react-count up`.
+- Install `react-intersection-observer`.
+- Install `react-router-dom`.
+- Install `react-chartjs-2`.
+- Install `fontawesome`.
+
+Once done, you can start the frontend with the following command:
+
+- `npm run dev`
+
+It will most likely start on port 5173 or 5174 by default.
