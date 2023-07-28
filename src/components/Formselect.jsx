@@ -179,7 +179,7 @@ export default function GraficoPastel() {
                                 <h5
                                     class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
                                     id="exampleModalLabel">
-                                    Modal title
+                                    Detectar emociones
                                 </h5>
                                 
                                 <button

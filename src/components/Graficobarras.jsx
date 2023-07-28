@@ -44,40 +44,46 @@ import {
       const iracundos = data.map((item) => item.ira);
       const odiosos = data.map((item) => item.odio);
       const sorprendidos = data.map((item) => item.sorpresa);
-
+      const neutrales = data.map((item) => item.neutral);
+  
       var totalContentos = 0;
       var totalDesanimados = 0;
       var totalIra = 0;
       var totalOdio = 0;
       var totalSorprendidos = 0;
-
+      var totalNeutral = 0;
+  
       contentos.forEach(function (contento) {
           totalContentos += contento
       })
-
+  
       desanimados.forEach(function (desanimado) {
           totalDesanimados += desanimado
       })
-
+  
       iracundos.forEach(function (ira) {
           totalIra += ira
       })
-
+  
       odiosos.forEach(function (odio) {
           totalOdio += odio
       })
-
+  
       sorprendidos.forEach(function (sorprendido) {
           totalSorprendidos += sorprendido
       })
-
+  
+      neutrales.forEach(function (neutral) {
+        totalNeutral += neutral
+    })
+  
       const grafico = {
-          labels: ["Contentos", "Desanimados", "Ira", "Odio", "Sorprendidos"],
+          labels: ["Contentos", "Desanimados", "Ira", "Odio", "Sorprendidos", "Neutral"],
           datasets: [
               {
                   label: "Emociones",
-                  data: [totalContentos, totalDesanimados, totalIra, totalOdio, totalSorprendidos],
-                  backgroundColor: ["green", "blue", "red", "black", "yellow"],
+                  data: [totalContentos, totalDesanimados, totalIra, totalOdio, totalSorprendidos, totalNeutral],
+                  backgroundColor: ["green", "blue", "red", "black", "yellow", "gray"],
               },
           ],
       };

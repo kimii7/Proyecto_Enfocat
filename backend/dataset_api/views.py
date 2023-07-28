@@ -18,7 +18,7 @@ from django.db.models import Q
 
 import json
 
-from .data.reconocimiento_emociones import ejecutar_script
+from .data.reconocimiento_emociones_MTCNN import ejecutar_script
 
 # Create your views here.
 class ShowAll(APIView):

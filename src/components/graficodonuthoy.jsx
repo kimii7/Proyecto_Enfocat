@@ -25,12 +25,14 @@ const fetchData = async () => {
     const iracundos = data.map((item) => item.ira);
     const odiosos = data.map((item) => item.odio);
     const sorprendidos = data.map((item) => item.sorpresa);
+    const neutrales = data.map((item) => item.neutral);
 
     var totalContentos = 0;
     var totalDesanimados = 0;
     var totalIra = 0;
     var totalOdio = 0;
     var totalSorprendidos = 0;
+    var totalNeutral = 0;
 
     contentos.forEach(function (contento) {
         totalContentos += contento
@@ -52,12 +54,16 @@ const fetchData = async () => {
         totalSorprendidos += sorprendido
     })
 
+    neutrales.forEach(function (neutral) {
+      totalNeutral += neutral
+  })
+
     const grafico = {
-        labels: ["Contentos", "Desanimados", "Ira", "Odio", "Sorprendidos"],
+        labels: ["Contentos", "Desanimados", "Ira", "Odio", "Sorprendidos", "Neutral"],
         datasets: [
             {
-                data: [totalContentos, totalDesanimados, totalIra, totalOdio, totalSorprendidos],
-                backgroundColor: ["green", "blue", "red", "black", "yellow"],
+                data: [totalContentos, totalDesanimados, totalIra, totalOdio, totalSorprendidos, totalNeutral],
+                backgroundColor: ["green", "blue", "red", "black", "yellow", "gray"],
             },
         ],
     };

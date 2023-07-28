@@ -33,6 +33,7 @@ const fetchData = async () => {
     const iracundos = data.map((item) => item.ira);
     const odiosos = data.map((item) => item.odio);
     const sorprendidos = data.map((item) => item.sorpresa);
+    const neutrales = data.map((item) => item.neutral);
 
     const grafico = {
       labels: fecha,
@@ -76,7 +77,7 @@ const fetchData = async () => {
           borderColor: '#81A684',
           pointRadius: 6,
           pointBackgroundColor: '#0E0F19',
-          backgroundColor: 'rgba(180, 180, 180, 0.3)',
+          backgroundColor: 'rgba(200, 180, 180, 0.3)',
           fill: true,
           hidden: true,
         },
@@ -88,6 +89,17 @@ const fetchData = async () => {
           pointRadius: 6,
           pointBackgroundColor: '#0E0F19',
           backgroundColor: 'rgba(229, 190, 1, 0.3)',
+          fill: true,
+          hidden: true,
+        },
+        {
+          label: 'Neutrales',
+          data: neutrales,
+          tension: 0.4,
+          borderColor: '#81A684',
+          pointRadius: 6,
+          pointBackgroundColor: '#0E0F19',
+          backgroundColor: 'rgba(101, 115, 126, 0.3)',
           fill: true,
           hidden: true,
         },
