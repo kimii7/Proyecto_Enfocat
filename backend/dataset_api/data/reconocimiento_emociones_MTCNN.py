@@ -99,7 +99,7 @@ def ejecutar_script():
         # Detección de caras utilizando MTCNN
         faces = face_detector.detect_faces(frame)
 
-        umbral = 0.95
+        umbral = 65
         for face in faces:
             x, y, w, h = face['box']
 
